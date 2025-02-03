@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic-Calculator</title>
+    <!-- BootStrap css link -->
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <!-- icons cdn link -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+        body {
+            background: rgb(0, 0, 0);
+            background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(217, 217, 219, 1) 100%, rgba(0, 212, 255, 1) 100%);
+        }
+
+        .calculator {
+            background: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .btn {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .clear-btn {
+            cursor: pointer;
+            background-color: red;
+            color: white;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center text-white text-uppercase mt-5 fw-bold">basic</h2>
+        <h1 class="text-center text-white text-uppercase fw-bold">calculator</h1>
+        <div class="w-50 border-50 m-auto mt-5 p-5 calculator">
+            <div class="d-flex gap-2 mb-5">
+                <input type="number" class="form-control" placeholder="value : 1" id="value1">
+                <input type="number" class="form-control" placeholder="value : 2" id="value2">
+            </div>
+            <div class="d-flex justify-content-between">
+                <div class="btn d-flex align-items-center justify-content-center fs-1 btn-primary" id="add">
+                    <i class="ri-add-fill"></i>
+                </div>
+                <div class="btn d-flex align-items-center justify-content-center fs-1 btn-primary" id="sub">
+                    <i class="ri-subtract-line"></i>
+                </div>
+                <div class="btn d-flex align-items-center justify-content-center fs-1 btn-primary" id="mul">
+                    <i class="ri-close-fill"></i>
+                </div>
+                <div class="btn d-flex align-items-center justify-content-center fs-1 btn-primary" id="div">
+                    <i class="ri-divide-line"></i>
+                </div>
+            </div>
+            <div class="text-center clear-btn mt-5 p-3 fs-3" id="clear">
+                CLEAR
+            </div>
+            <div id="answer" class="form-control mt-5 fs-1 text-center text-secondary">ANSWER</div>
+        </div>
+    </div>
+
+    <!-- JQuery link -->
+    <script src="./assets/js/jquery-3.7.1.min.js"></script>
+    <script>
+        const ansElement = document.getElementById("answer");
+        function addision(v1, v2) {
+            ansElement.innerHTML = v1 + v2;
+        }
+        function subtraction(v1, v2) {
+            ansElement.innerHTML = v1 - v2;
+        }
+        function multiplication(v1, v2) {
+            ansElement.innerHTML = v1 * v2;
+        }
+        function divison(v1, v2) {
+            ansElement.innerHTML = v1 / v2;
+        }
+        let element1 = document.getElementById("value1");
+        let element2 = document.getElementById("value2");
+        $(document).ready(function () {
+            $("#add").on('click', function () {
+                addision(parseFloat(element1.value), parseFloat(element2.value));
+            })
+            $("#sub").on('click', function () {
+                subtraction(parseFloat(element1.value), parseFloat(element2.value));
+            })
+            $("#mul").on('click', function () {
+                multiplication(parseFloat(element1.value), parseFloat(element2.value));
+            })
+            $("#div").on('click', function () {
+                divison(parseFloat(element1.value), parseFloat(element2.value));
+            })
+            $("#clear").on('click', function () {
+                element1.value = "";
+                element2.value = "";
+                document.getElementById("answer").innerHTML = "----";
+            })
+        })
+    </script>
+</body>
+
+</html>
