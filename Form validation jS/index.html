@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation</title>
+    <!-- bootstrap css link -->
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: radial-gradient(circle at 30% 86%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%), radial-gradient(circle at 55% 100%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%), radial-gradient(circle at 40% 75%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%), radial-gradient(circle at 7% 99%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%), radial-gradient(circle at 69% 76%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%), radial-gradient(circle at 2% 35%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%), radial-gradient(circle at 14% 48%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%), radial-gradient(circle at 28% 87%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%), radial-gradient(circle at 65% 14%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%), radial-gradient(circle at 51% 36%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%), radial-gradient(circle at 6% 93%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%), linear-gradient(135deg, rgb(23, 233, 173), rgb(29, 24, 208));
+        }
+
+        h1 {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(9px);
+            /* -webkit-backdrop-filter: blur(9px); */
+            /* border-radius: 10px; */
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: white;
+            text-shadow: 2px 2px 2px black;
+            letter-spacing: 5px;
+            word-spacing: 5px;
+            padding: 15px;
+            margin-bottom: 0px;
+        }
+
+        .glass-bg {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.5);
+            backdrop-filter: blur(5px);
+            /* -webkit-backdrop-filter: blur(5px); */
+            /* border-radius: 10px; */
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        input::placeholder {
+            opacity: 0.5 !important;
+            color: black;
+            font-weight: 600;
+        }
+
+        /* toggle switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #3248d8ed;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: rgb(255, 255, 255);
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #198754;
+        }
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="vh-100 d-flex align-items-center">
+        <div class="container">
+            <form action="" id="form">
+                <div class="col-md-6 m-auto">
+                    <h1 class="text-center text-uppercase">sign up</h1>
+                    <div class="glass-bg p-5">
+                        <input type="text" name="name" id="name" placeholder="Full Name" class="form-control mb-3">
+                        <input type="email" name="mail" id="mail" placeholder="e-mail" class="form-control mb-3">
+                        <input type="number" name="contact" id="contact" placeholder="contact"
+                            class="form-control mb-3">
+                        <input type="password" name="password" id="pass" placeholder="password"
+                            class="form-control mb-3">
+                        <input type="password" name="confirmPassword" id="confirmPass" placeholder="confirm password"
+                            class="form-control mb-3">
+                        <div class="mb-3 d-flex align-items-center gap-2">
+                            <span class="text-white fs-4">Remember Me</span>
+                            <label for="remember" class="switch position-relative">
+                                <input type="checkbox" name="remember" id="remember" class="">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <button class="btn btn-success" id="sub">submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+
+
+    <!-- jQuery script link -->
+    <script src="./assets/js/jquery-3.7.1.min.js"></script>
+    <!-- sweet alert link -->
+    <script src="./assets/js/sweetalert2@11.js"></script>
+
+    <script>
+        let fullName = document.getElementById("name");
+        let mail = document.getElementById("mail");
+        let contact = document.getElementById("contact");
+        let password = document.getElementById("pass");
+        let confirmPassword = document.getElementById("confirmPass");
+        let form = document.getElementById("form");
+
+        $(document).ready(function () {
+            $("#sub").on('click', function (e) {
+                e.preventDefault();
+                let flag = false;
+                if (fullName.value.trim() == "") {
+                    flag = true
+                    Swal.fire({
+                        imageUrl: "https://media.tenor.com/dkGEtuiYV5MAAAAM/give-me-a-name-scoot-mcnairy.gif",
+                        imageAlt: "Give me a name"
+                    });
+                }
+                if (mail.value.trim() == "") {
+                    flag = true
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Email is required!",
+                    });
+                }
+                if (contact.value.trim() == "") {
+                    flag = true
+                    Swal.fire({
+                        icon: "error",
+                        title: "Contact error...",
+                        text: "Contact number is required!",
+                    });
+                }
+                if (contact.value.length != 10) {
+                    flag = true
+                    Swal.fire({
+                        icon: "error",
+                        title: "Contact error...",
+                        text: "Please enter valid mobile number",
+                    });
+                }
+                if (password.value.length < 3) {
+                    flag = true
+                    Swal.fire({
+                        icon: "error",
+                        title: "Password error...",
+                        text: "Password should be atleast 3 character or more...",
+                    });
+                } else if (password.value != confirmPassword.value) {
+                    flag = true
+                    Swal.fire({
+                        icon: "error",
+                        title: "Password error...",
+                        text: "Confirm password does not matched...",
+                    });
+                }
+                if (flag == false) form.submit();
+
+            })
+        })
+
+    </script>
+</body>
+
+</html>
