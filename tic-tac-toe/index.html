@@ -15,19 +15,19 @@
         #tic-tac-toe {
             display: grid;
             grid-template-columns: repeat(3, 100px);
-            gap: 10px;
+            /* gap: 10px; */
         }
 
         .cell {
             width: 100px;
             height: 100px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            /* background-color: rgba(255, 255, 255, 0.1); */
+            /* border-radius: 10px; */
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 2.5em;
-            cursor: pointer;
+            cursor: grab;
             transition: all 0.3s ease;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -35,7 +35,6 @@
 
         .cell:hover {
             background-color: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
         }
     </style>
 </head>
@@ -43,16 +42,29 @@
 <body>
     <section class="vh-100 d-flex justify-content-center align-items-center">
 
-        <div id="tic-tac-toe">
-            <div class="cell" data-index="0" id="t1"></div>
-            <div class="cell" data-index="1" id="t2"></div>
-            <div class="cell" data-index="2" id="t3"></div>
-            <div class="cell" data-index="3" id="t4"></div>
-            <div class="cell" data-index="4" id="t5"></div>
-            <div class="cell" data-index="5" id="t6"></div>
-            <div class="cell" data-index="6" id="t7"></div>
-            <div class="cell" data-index="7" id="t8"></div>
-            <div class="cell" data-index="8" id="t9"></div>
+        <div class="text-center">
+            <h1 class="text-white text-uppercase mb-5">tic tac toe</h1>
+            <div id="tic-tac-toe">
+                <div class="cell border-5 border-bottom border-end" id="t1"></div>
+                <div class="cell border-5 border-bottom border-end" id="t2"></div>
+                <div class="cell border-5 border-bottom" id="t3"></div>
+                <div class="cell border-5 border-bottom border-end" id="t4"></div>
+                <div class="cell border-5 border-bottom border-end" id="t5"></div>
+                <div class="cell border-5 border-bottom" id="t6"></div>
+                <div class="cell border-5 border-end" id="t7"></div>
+                <div class="cell border-5 border-end" id="t8"></div>
+                <div class="cell border-5" id="t9"></div>
+            </div>
+            <div class="d-flex justify-content-between text-white fs-5 fw-bold my-4">
+                <div class="bg-success py-2 px-4">X wins :
+                    <span id="pointX">0</span>
+                </div>
+
+                <div class="bg-success py-2 px-4">O wins :
+                    <span id="pointO">0</span>
+                </div>
+            </div>
+            <button class="btn btn-primary text-uppercase fw-bold py-2 px-4 rounded-0">reset</button>
         </div>
 
     </section>
@@ -64,6 +76,12 @@
     <script>
         let count = 0;
         let flag = true;
+        function clear() {
+            for (let i = 1; i <= 9; i++) {
+                document.getElementById(`t${i}`).innerHTML = ""
+                count = 0
+            }
+        }
 
         let pointX = parseInt(document.getElementById("pointX").innerHTML)
         let pointO = parseInt(document.getElementById("pointO").innerHTML)
@@ -82,12 +100,13 @@
                     icon: "success",
                     title: `${val} won`,
                     text: "Something went wrong!",
+                }).then(() => {
+                    clear()
                 })
                 if (val == "X") {
-                    document.getElementById("xWins").innerHTML = `X Wins: ${pointX += 1}`
+                    document.getElementById("pointX").innerHTML = `${pointX += 1}`
                 } else {
-                    document.getElementById("oWins").innerHTML = `O Wins: ${pointO += 1}`
-
+                    document.getElementById("pointO").innerHTML = `${pointO += 1}`
                 }
                 return true;
             }
@@ -107,12 +126,14 @@
                     icon: "success",
                     title: `${val} won`,
                     text: "Something went wrong!",
+                }).then(() => {
+                    clear()
                 })
 
                 if (val == "X") {
-                    document.getElementById("xWins").innerHTML = `X Wins: ${pointX += 1}`
+                    document.getElementById("pointX").innerHTML = `${pointX += 1}`
                 } else {
-                    document.getElementById("oWins").innerHTML = `O Wins: ${pointO += 1}`
+                    document.getElementById("pointO").innerHTML = `${pointO += 1}`
 
                 }
                 return true;
@@ -133,12 +154,14 @@
                     icon: "success",
                     title: `${val} won`,
                     text: "Something went wrong!",
+                }).then(() => {
+                    clear()
                 })
 
                 if (val == "X") {
-                    document.getElementById("xWins").innerHTML = `X Wins: ${pointX += 1}`
+                    document.getElementById("pointX").innerHTML = `${pointX += 1}`
                 } else {
-                    document.getElementById("oWins").innerHTML = `O Wins: ${pointO += 1}`
+                    document.getElementById("pointO").innerHTML = `${pointO += 1}`
 
                 }
                 return true;
@@ -158,12 +181,14 @@
                     icon: "success",
                     title: `${val} won`,
                     text: "Something went wrong!",
+                }).then(() => {
+                    clear()
                 })
 
                 if (val == "X") {
-                    document.getElementById("xWins").innerHTML = `X Wins: ${pointX += 1}`
+                    document.getElementById("pointX").innerHTML = `${pointX += 1}`
                 } else {
-                    document.getElementById("oWins").innerHTML = `O Wins: ${pointO += 1}`
+                    document.getElementById("pointO").innerHTML = `${pointO += 1}`
 
                 }
                 return true;
@@ -183,12 +208,14 @@
                     icon: "success",
                     title: `${val} won`,
                     text: "Something went wrong!",
+                }).then(() => {
+                    clear()
                 })
 
                 if (val == "X") {
-                    document.getElementById("xWins").innerHTML = `X Wins: ${pointX += 1}`
+                    document.getElementById("pointX").innerHTML = `${pointX += 1}`
                 } else {
-                    document.getElementById("oWins").innerHTML = `O Wins: ${pointO += 1}`
+                    document.getElementById("pointO").innerHTML = `${pointO += 1}`
 
                 }
                 return true;
@@ -208,12 +235,14 @@
                     icon: "success",
                     title: `${val} won`,
                     text: "Something went wrong!",
+                }).then(() => {
+                    clear()
                 })
 
                 if (val == "X") {
-                    document.getElementById("xWins").innerHTML = `X Wins: ${pointX += 1}`
+                    document.getElementById("pointX").innerHTML = `${pointX += 1}`
                 } else {
-                    document.getElementById("oWins").innerHTML = `O Wins: ${pointO += 1}`
+                    document.getElementById("pointO").innerHTML = `${pointO += 1}`
 
                 }
                 return true;
@@ -233,12 +262,14 @@
                     icon: "success",
                     title: `${val} won`,
                     text: "Something went wrong!",
+                }).then(() => {
+                    clear()
                 })
 
                 if (val == "X") {
-                    document.getElementById("xWins").innerHTML = `X Wins: ${pointX += 1}`
+                    document.getElementById("pointX").innerHTML = `${pointX += 1}`
                 } else {
-                    document.getElementById("oWins").innerHTML = `O Wins: ${pointO += 1}`
+                    document.getElementById("pointO").innerHTML = `${pointO += 1}`
 
                 }
                 return true;
@@ -258,13 +289,14 @@
                     icon: "success",
                     title: `${val} won`,
                     text: "Something went wrong!",
+                }).then(() => {
+                    clear()
                 })
 
                 if (val == "X") {
-                    document.getElementById("xWins").innerHTML = `X Wins: ${pointX += 1}`
+                    document.getElementById("pointX").innerHTML = `${pointX += 1}`
                 } else {
-                    document.getElementById("oWins").innerHTML = `O Wins: ${pointO += 1}`
-
+                    document.getElementById("pointO").innerHTML = `${pointO += 1}`
                 }
                 return true;
             }
@@ -279,14 +311,6 @@
                 });
             }
         }
-
-        function clear() {
-            for (let i = 1; i <= 9; i++) {
-                document.getElementById(`t${i}`).innerHTML = "";
-                count = 0;
-            }
-        }
-
         $(".cell").on("click", function () {
             let tile = $(this)[0]
 
@@ -319,6 +343,11 @@
                     count % 2 == 0 ? clicked.innerHTML = "X" : clicked.innerHTML = "O";
                     count++;
                 }
+            })
+            $('button').on('click', function () {
+                clear();
+                document.getElementById("pointX").innerHTML = 0
+                document.getElementById("pointO").innerHTML = 0
             })
         })
     </script>
