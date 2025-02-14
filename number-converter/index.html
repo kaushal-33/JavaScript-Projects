@@ -13,7 +13,7 @@
         }
 
         section {
-            background-image: linear-gradient(112deg, #8080AA 66%, #F5E9DD 36%);
+            background-image: url('https://img.freepik.com/free-vector/abstract-blue-grunge-background-with-halftone-effect_1017-32529.jpg?t=st=1739538104~exp=1739541704~hmac=6269e3303150578f864b89bc9e65f71d4a974067e5381bc1ee0e50b341b2ab4d&w=740');
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -39,6 +39,7 @@
             font-size: 1.1rem;
             margin-bottom: 10px;
             color: black;
+            text-transform: capitalize;
         }
 
         select,
@@ -62,7 +63,7 @@
         .convert-btn {
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #8080AA;
             color: white;
             border: none;
             border-radius: 5px;
@@ -71,14 +72,14 @@
         }
 
         .convert-btn:hover {
-            background-color: #0056b3;
+            background-color: #8080AA;
         }
 
         .form-section {
             padding-block: 50px;
             padding-inline: 30px;
             background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 10px;
@@ -128,7 +129,7 @@
                 </div>
                 <div class="text-center">
                     <button class="convert-btn text-uppercase" id="convert-btn">Convert</button>
-                    <button class="btn btn-success w-100 text-uppercase mt-3" id="reset-btn">reset</button>
+                    <button class=" btn  btn-secondary w-100 text-uppercase mt-3" id="reset-btn">reset</button>
                 </div>
             </div>
         </div>
@@ -153,8 +154,8 @@
             const regexHexadecimal = /^[0-9a-fA-F]+$/; // 0-9, a-f, A-F for hexadecimal
 
             // Update label for unit-2 select
-            $(unit2).on("click", function () {
-                switch (parseInt(unit2.value)) {
+            $(unit2).on("change", function (e) {
+                switch (parseInt(e.target.value)) {
                     case 2: label2.innerHTML = "binary :"; break;
                     case 8: label2.innerHTML = "octal :"; break;
                     case 10: label2.innerHTML = "decimal :"; break;
@@ -163,8 +164,8 @@
             });
 
             // Update label for unit-1 select
-            $(unit1).on("click", function () {
-                switch (parseInt(unit1.value)) {
+            $(unit1).on("change", function (e) {
+                switch (parseInt(e.target.value)) {
                     case 2: label1.innerHTML = "binary :"; break;
                     case 8: label1.innerHTML = "octal :"; break;
                     case 10: label1.innerHTML = "decimal :"; break;
