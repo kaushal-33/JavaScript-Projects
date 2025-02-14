@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter - Number</title>
+    <!-- css link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        section {
+            background-image: linear-gradient(112deg, #8080AA 66%, #F5E9DD 36%);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 30px;
+            color: black;
+        }
+
+        .label {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: black;
+        }
+
+        select,
+        input {
+            padding: 10px;
+            font-size: 1rem;
+            width: 100%;
+            border: 2px solid rgba(0, 0, 0, 0.236);
+            background-color: transparent;
+            border-radius: 5px;
+            outline: none;
+            color: black;
+            text-transform: uppercase;
+        }
+
+        .d-flex {
+            display: flex;
+            gap: 20px;
+        }
+
+        .convert-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .convert-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .form-section {
+            padding-block: 50px;
+            padding-inline: 30px;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        @media (max-width: 576px) {
+            .d-flex {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-12 col-md-6 container">
+            <div class="form-section position-relative z-1">
+                <h1 class="title">Number Converter</h1>
+                <div class="d-flex gap-5 mb-3">
+                    <select name="" id="unit-1" class="w-100">
+                        <option value="2">binary</option>
+                        <option value="8">octal</option>
+                        <option value="10">decimal</option>
+                        <option value="16">hexadecimal</option>
+                    </select>
+                    <select name="" id="unit-2" class="w-100">
+                        <option value="2">binary</option>
+                        <option value="8">octal</option>
+                        <option value="10">decimal</option>
+                        <option value="16">hexadecimal</option>
+                    </select>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <label class="label" id="label-1">binary :</label>
+                        <input type="text" id="input-1" class="w-100">
+                    </div>
+                    <div>
+                        <label class="label" id="label-2">binary :</label>
+                        <input type="text" id="input-2" class="w-100" disabled>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="convert-btn text-uppercase" id="convert-btn">Convert</button>
+                    <button class="btn btn-success w-100 text-uppercase mt-3" id="reset-btn">reset</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery link -->
+    <script src="./assets/jquery-3.7.1.min.js"></script>
+    <!-- sweet alert link -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            let unit1 = document.getElementById("unit-1");
+            let unit2 = document.getElementById("unit-2");
+            let input1 = document.getElementById("input-1");
+            let input2 = document.getElementById("input-2");
+            let label1 = document.getElementById("label-1")
+            let label2 = document.getElementById("label-2")
+
+            const regexBinary = /^[01]+$/; // Only 0 and 1 for binary
+            const regexOctal = /^[0-7]+$/; // Only digits 0-7 for octal
+            const regexDecimal = /^[0-9]+$/; // Only digits for decimal
+            const regexHexadecimal = /^[0-9a-fA-F]+$/; // 0-9, a-f, A-F for hexadecimal
+
+            // Update label for unit-2 select
+            $(unit2).on("click", function () {
+                switch (parseInt(unit2.value)) {
+                    case 2: label2.innerHTML = "binary :"; break;
+                    case 8: label2.innerHTML = "octal :"; break;
+                    case 10: label2.innerHTML = "decimal :"; break;
+                    case 16: label2.innerHTML = "hexadecimal :"; break;
+                }
+            });
+
+            // Update label for unit-1 select
+            $(unit1).on("click", function () {
+                switch (parseInt(unit1.value)) {
+                    case 2: label1.innerHTML = "binary :"; break;
+                    case 8: label1.innerHTML = "octal :"; break;
+                    case 10: label1.innerHTML = "decimal :"; break;
+                    case 16: label1.innerHTML = "hexadecimal :"; break;
+                }
+            });
+
+            // Convert button functionality
+            $("#convert-btn").on("click", function () {
+                if (input1.value.trim() == "") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Please enter a number to convert..!",
+                    });
+                    return;
+                }
+
+                let inputNum = input1.value;
+                let validInput = false;
+
+                switch (parseInt(unit1.value)) {
+                    case 2:
+                        validInput = regexBinary.test(inputNum);
+                        break;
+                    case 8:
+                        validInput = regexOctal.test(inputNum);
+                        break;
+                    case 10:
+                        validInput = regexDecimal.test(inputNum);
+                        break;
+                    case 16:
+                        validInput = regexHexadecimal.test(inputNum);
+                        break;
+                }
+
+                if (!validInput) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Invalid input..!",
+                    });
+                    return;
+                }
+
+                let decimalNum;
+                switch (parseInt(unit1.value)) {
+                    case 2: decimalNum = parseInt(inputNum, 2); break;
+                    case 8: decimalNum = parseInt(inputNum, 8); break;
+                    case 10: decimalNum = parseInt(inputNum, 10); break;
+                    case 16: decimalNum = parseInt(inputNum, 16); break;
+                }
+
+                let answer;
+                switch (parseInt(unit2.value)) {
+                    case 2: answer = decimalNum.toString(2); break;
+                    case 8: answer = decimalNum.toString(8); break;
+                    case 10: answer = decimalNum.toString(10); break;
+                    case 16: answer = decimalNum.toString(16); break;
+                }
+
+                input2.value = answer;
+            });
+
+            $("#reset-btn").on("click", function () {
+                input1.value = "";
+                unit1.value = "2";
+                unit2.value = "2";
+            })
+        });
+    </script>
+</body>
+
+</html>
