@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To_uppercase</title>
+</head>
+
+<body>
+    <input type="text" id="input_text">
+    <button id="submit">Convert</button>
+    <h1 id="display"></h1>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#submit").on("click", function () {
+                let input = document.getElementById("input_text")
+                let display = document.getElementById("display")
+                display.innerHTML = input.value.toLowerCase();
+            })
+        })
+    </script>
+</body>
+
+</html>

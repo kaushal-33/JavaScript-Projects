@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>remove duplicate</title>
+</head>
+
+<body>
+    <input type="number" id="input1"><br><br>
+    <input type="number" id="input2"><br><br>
+    <input type="number" id="input3"><br><br>
+    <input type="number" id="input4"><br><br>
+    <input type="number" id="input5"><br><br>
+    <input type="number" id="input6"><br><br>
+    <input type="number" id="input7"><br><br>
+    <input type="number" id="input8"><br><br>
+    <h1 id="display"></h1>
+    <button id="submit">Submit</button>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#submit").on("click", function () {
+                let arr = []
+                for (let i = 1; i <= 8; i++) {
+                    let val = document.getElementById(`input${i}`).value
+                    arr.push(val)
+                }
+                let uniqueArr = []
+                arr.forEach(item => {
+                    if (!uniqueArr.includes(item)) {
+                        uniqueArr.push(item);
+                    }
+                });
+                document.getElementById("display").innerHTML = uniqueArr.join(",")
+            })
+        })
+    </script>
+</body>
+
+</html>

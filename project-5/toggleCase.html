@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2nd Largest and smallest</title>
+</head>
+
+<body>
+    <input type="text" id="input">
+    <button id="submit">Submit</button>
+    <h1 id="display"></h1>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#submit").on("click", function () {
+                input = document.getElementById("input")
+                let arr = input.value.split("");
+                console.log(arr);
+                let newArr = []
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i] == arr[i].toLowerCase()) {
+                        newArr[i] = arr[i].toUpperCase()
+                    }
+                    if (arr[i] == arr[i].toUpperCase()) {
+                        newArr[i] = arr[i].toLowerCase()
+                    }
+                }
+                document.getElementById("display").innerHTML = newArr.join("");
+            })
+        })
+    </script>
+</body>
+
+</html>

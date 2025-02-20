@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2nd Largest and smallest</title>
+</head>
+
+<body>
+    <input type="number" id="input1"><br><br>
+    <input type="number" id="input2"><span id="lowest"></span><br><br>
+    <input type="number" id="input3"><br><br>
+    <input type="number" id="input4"><span id="highest"></span><br><br>
+    <input type="number" id="input5"><br><br>
+    <button id="submit">Submit</button>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#submit").on("click", function () {
+                let arr = []
+                for (let i = 1; i <= 5; i++) {
+                    let val = document.getElementById(`input${i}`).value
+                    arr.push(val)
+                }
+                arr.sort((a, b) => a - b)
+                for (let i = 1; i <= 5; i++) {
+                    document.getElementById(`input${i}`).value = arr[i - 1]
+                }
+                document.getElementById("lowest").innerHTML = " 2nd - smallest number";
+                document.getElementById("highest").innerHTML = " 2nd - largest number";
+            })
+        })
+    </script>
+</body>
+
+</html>

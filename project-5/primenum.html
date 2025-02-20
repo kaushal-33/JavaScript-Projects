@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prime numbers in array</title>
+</head>
+
+<body>
+    <input type="number" id="input1"><br><br>
+    <input type="number" id="input2"><br><br>
+    <input type="number" id="input3"><br><br>
+    <input type="number" id="input4"><br><br>
+    <input type="number" id="input5"><br><br>
+    <button id="submit">Submit</button>
+    <h1 id="display"></h1>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#submit").on("click", function () {
+                let arr = [];
+                for (let i = 1; i <= 5; i++) {
+                    let val = parseInt(document.getElementById(`input${i}`).value);
+                    arr.push(val);
+                }
+                function isPrime(num) {
+                    if (num <= 1) return false;
+                    for (let i = 2; i * i <= num; i++) {
+                        if (num % i === 0) return false;
+                    }
+                    return true;
+                }
+                let primeNumbers = arr.filter(isPrime);
+                document.getElementById("display").innerHTML = "Prime Numbers are : " + primeNumbers.join(", ")
+            });
+        });
+    </script>
+</body>
+
+</html>
