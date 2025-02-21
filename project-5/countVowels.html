@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count Vowels</title>
+</head>
+
+<body>
+    <h2>enter string</h2>
+    <input type="text" id="input">
+    <button id="submit">Check</button>
+    <h1 id="display"></h1>
+</body>
+
+<script src="./jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let input = document.getElementById("input")
+        let display = document.getElementById("display")
+        $("#submit").on("click", function () {
+            let arr = []
+            arr = input.value.toLowerCase().split(" ")
+            let charArr = []
+            let vowels = 0
+            let consonant = 0
+            for (let i = 0; i < arr.length; i++) {
+                charArr = arr[i].split("")
+                for (let j = 0; j < charArr.length; j++) {
+                    if (charArr[j] == "a" || charArr[j] == 'e' || charArr[j] == 'i' || charArr[j] == 'o' || charArr[j] == 'u') {
+                        vowels++;
+                    } else {
+                        consonant++
+                    }
+                }
+            }
+            display.innerHTML = `the vowels are "${vowels}" and consonants are "${consonant}"`
+        })
+    })
+</script>
+
+</html>

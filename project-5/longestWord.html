@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>longest_word</title>
+</head>
+
+<body>
+    <h2>enter string</h2>
+    <input type="text" id="input">
+    <button id="submit">Check</button>
+    <h1 id="display"></h1>
+</body>
+
+<script src="./jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let input = document.getElementById("input")
+        let display = document.getElementById("display")
+        $("#submit").on("click", function () {
+            let arr = []
+            arr = input.value.split(" ")
+            let longestWord = arr[0]
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 1; j < arr.length; j++) {
+                    if (arr[i].length < arr[j].length) {
+                        longestWord = arr[j]
+                    }
+                }
+            }
+            display.innerHTML = `the longest word is "${longestWord}"`
+        })
+    })
+</script>
+
+</html>

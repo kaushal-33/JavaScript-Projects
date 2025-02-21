@@ -116,8 +116,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         let count = 0;
-        let flag = true;
-
         function clear() {
             count = 0;
             for (let i = 1; i <= 9; i++) {
@@ -135,8 +133,9 @@
         let pointX = parseInt(document.getElementById("pointX").innerHTML)
         let pointO = parseInt(document.getElementById("pointO").innerHTML)
         function checkWin(val) {
+            let flag = true;
             for (let i = 1; i <= 3; i++) {
-                let symbol = document.getElementById(`t${i}`).children[0];
+                let symbol = document.getElementById(`t${i}`).children[0].innerHTML;
                 console.log(symbol);
 
                 if (symbol != val) {
@@ -393,6 +392,8 @@
                 clear();
                 document.getElementById("pointX").innerHTML = 0
                 document.getElementById("pointO").innerHTML = 0
+                pointX = 0;
+                pointO = 0;
             })
         })
     </script>
