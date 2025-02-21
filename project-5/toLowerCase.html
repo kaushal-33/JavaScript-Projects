@@ -4,13 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To_uppercase</title>
+    <title>To_Lowercase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 95%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h1 {
+            font-size: 20px;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                max-width: 300px;
+            }
+
+            input[type="text"],
+            button {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <input type="text" id="input_text">
-    <button id="submit">Convert</button>
-    <h1 id="display"></h1>
+    <div class="container">
+        <h2>Enter string</h2>
+        <input type="text" id="input_text">
+        <button id="submit">Convert</button>
+        <h1 id="display"></h1>
+    </div>
     <script src="./jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function () {

@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Longest Word</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anagram Check</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,7 +63,6 @@
             color: #333;
         }
 
-        /* Responsive adjustments */
         @media (max-width: 600px) {
             .container {
                 padding: 15px;
@@ -88,8 +87,10 @@
 
 <body>
     <div class="container">
-        <h2>Enter sentence</h2>
-        <input type="text" id="input" placeholder="Type here">
+        <h2>Enter first string</h2>
+        <input type="text" id="input">
+        <h2>Enter second string to check</h2>
+        <input type="text" id="input2">
         <button id="submit">Check</button>
         <h1 id="display"></h1>
     </div>
@@ -97,22 +98,29 @@
     <script src="./jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function () {
-            let input = document.getElementById("input")
-            let display = document.getElementById("display")
+            let input1 = document.getElementById("input");
+            let input2 = document.getElementById("input2");
+            let display = document.getElementById("display");
+
             $("#submit").on("click", function () {
-                let arr = []
-                arr = input.value.split(" ")
-                let longestWord = arr[0]
-                for (let i = 0; i < arr.length; i++) {
-                    for (let j = 1; j < arr.length; j++) {
-                        if (arr[i].length < arr[j].length) {
-                            longestWord = arr[j]
-                        }
-                    }
+                // Check if either input is empty or contains only whitespace
+                if (input1.value.trim() === "" || input2.value.trim() === "") {
+                    display.innerHTML = "Please enter any string!";
+                    return;
                 }
-                display.innerHTML = `The longest word is "${longestWord}"`;
-            })
-        })
+
+                // Sort the characters of each input
+                let sorted1 = input1.value.toLowerCase().split("").sort().join("");
+                let sorted2 = input2.value.toLowerCase().split("").sort().join("");
+
+                // Compare the sorted strings
+                if (sorted1 === sorted2) {
+                    display.innerHTML = "It's an anagram";
+                } else {
+                    display.innerHTML = "It's not an anagram";
+                }
+            });
+        });
     </script>
 </body>
 

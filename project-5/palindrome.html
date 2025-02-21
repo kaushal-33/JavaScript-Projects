@@ -4,34 +4,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palindrome-check</title>
+    <title>Palindrome Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            input, button {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <input type="text" id="input_palindrome">
-    <button id="submit">Check</button>
-    <h1 id="display"></h1>
-</body>
+    <div class="container">
+        <h2>Enter a string:</h2>
+        <input type="text" id="input_palindrome" placeholder="Type here">
+        <button id="submit">Check</button>
+        <h1 id="display"></h1>
+    </div>
 
-<script src="./jquery-3.7.1.min.js"></script>
-<script>
-    $(document).ready(function () {
-        let input = document.getElementById("input_palindrome")
-        let display = document.getElementById("display")
-        function checkPalindrome() {
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let input = document.getElementById("input_palindrome")
+            let display = document.getElementById("display")
 
-            let arr = input.value.toLowerCase().split("")
-            let reverseArr = arr.reverse().join("");
-            return (input.value.toLowerCase() == reverseArr) ? true : false;
-        }
-        $("#submit").on("click", function () {
-            if (checkPalindrome() == true) {
-                display.innerHTML = "Its a palindrome";
-            } else {
-                display.innerHTML = "Its not a palindrome";
+            function checkPalindrome() {
+                let arr = input.value.toLowerCase().split("")
+                let reverseArr = arr.reverse().join("");
+                return (input.value.toLowerCase() == reverseArr) ? true : false;
             }
+
+            $("#submit").on("click", function () {
+                if (checkPalindrome() == true) {
+                    display.innerHTML = "It's a palindrome";
+                } else {
+                    display.innerHTML = "It's not a palindrome";
+                }
+            })
         })
-    })
-</script>
+    </script>
+</body>
 
 </html>

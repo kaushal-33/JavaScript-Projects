@@ -4,33 +4,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2nd Largest and smallest</title>
+    <title>2nd Largest and Smallest</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .output {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+
+            input,
+            button {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .output {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <input type="number" id="input1"><br><br>
-    <input type="number" id="input2"><span id="lowest"></span><br><br>
-    <input type="number" id="input3"><br><br>
-    <input type="number" id="input4"><span id="highest"></span><br><br>
-    <input type="number" id="input5"><br><br>
-    <button id="submit">Submit</button>
+    <div class="container">
+        <h2>Enter five numbers:</h2>
+        <input type="number" id="input1"><br>
+        <input type="number" id="input2"><span id="lowest"></span><br>
+        <input type="number" id="input3"><br>
+        <input type="number" id="input4"><span id="highest"></span><br>
+        <input type="number" id="input5"><br><br>
+        <button id="submit">Submit</button>
+        <div class="output">
+            <p id="result"></p>
+        </div>
+    </div>
+
     <script src="./jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function () {
             $("#submit").on("click", function () {
-                let arr = []
+                let arr = [];
                 for (let i = 1; i <= 5; i++) {
-                    let val = document.getElementById(`input${i}`).value
-                    arr.push(val)
+                    let val = parseInt(document.getElementById(`input${i}`).value);
+                    arr.push(val);
                 }
-                arr.sort((a, b) => a - b)
-                for (let i = 1; i <= 5; i++) {
-                    document.getElementById(`input${i}`).value = arr[i - 1]
+
+                if (arr.length < 5) {
+                    document.getElementById("result").innerHTML = "Please enter all five numbers!";
+                    return;
                 }
-                document.getElementById("lowest").innerHTML = " 2nd - smallest number";
-                document.getElementById("highest").innerHTML = " 2nd - largest number";
-            })
-        })
+
+                arr.sort((a, b) => a - b);
+
+                // Get the second smallest and second largest
+                let secondSmallest = arr[1];
+                let secondLargest = arr[3];
+
+                document.getElementById("lowest").innerHTML = `2nd Smallest: ${secondSmallest}`;
+                document.getElementById("highest").innerHTML = `2nd Largest: ${secondLargest}`;
+            });
+        });
     </script>
 </body>
 

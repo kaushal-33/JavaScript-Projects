@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessibilities - Design Only</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .module {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            display: block;
+            cursor: pointer;
+            text-decoration: none;
+            transition: .3s all ease-in-out;
+        }
+
+        h2 {
+            transition: .3s all ease-in-out;
+        }
+
+        .module:hover {
+            box-shadow: 0 4px 18px rgba(21, 0, 248, 0.328);
+        }
+
+        .module:hover h2 {
+            color: #007BFF;
+        }
+
+        .module h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .module p {
+            color: #555;
+            font-size: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .module {
+                padding: 15px;
+            }
+
+            .module h2 {
+                font-size: 18px;
+            }
+
+            .module p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Accessibilities Menu</h1>
+    </header>
+    <main>
+        <!-- Module 1: Remove Duplicate -->
+        <a class="module" href="removeDuplicate.html" target="_blank">
+            <h2>Remove Duplicate</h2>
+            <p>This function will removes duplicate elements from an array.</p>
+        </a>
+        <a class="module" href="./2nd-largest-smallest.html" target="_blank">
+            <h2>2nd largest</h2>
+            <p>This function will find second largest number in an array.</p>
+        </a>
+        <a class="module" href="./anagram.html" target="_blank">
+            <h2>Anagram</h2>
+            <p>This function will checks whether both the strings are Anagram or not.</p>
+        </a>
+        <a class="module" href="./countVowels.html" target="_blank">
+            <h2>Count vowels and consonant</h2>
+            <p>This function will count no. of vowels and consonant in given string.</p>
+        </a>
+        <a class="module" href="./longestWord.html" target="_blank">
+            <h2>Longest word</h2>
+            <p>This function will shows longest word in given sentence</p>
+        </a>
+        <a class="module" href="./palindrome.html" target="_blank">
+            <h2>Palindrome</h2>
+            <p>This function will checks whether the given string is palindrome or not.</p>
+        </a>
+        <a class="module" href="./primenum.html" target="_blank">
+            <h2>Prime number from Array</h2>
+            <p>This function will counts the prime numbers in given array.</p>
+        </a>
+        <a class="module" href="./toUpperCase.html" target="_blank">
+            <h2>Uppercase</h2>
+            <p>This function will converts any LowerCase string into Uppercase</p>
+        </a>
+        <a class="module" href="./toLowerCase.html" target="_blank">
+            <h2>Lowercase</h2>
+            <p>This function will converts any Uppercase string into Lowercase</p>
+        </a>
+        <a class="module" href="./toggleCase.html" target="_blank">
+            <h2>Togglecase</h2>
+            <p>This function will converts any Lowercase alphabet to Uppercase and Uppercase alphabet to Lowercase from
+                given string.</p>
+        </a>
+    </main>
+</body>
+
+</html>
