@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To_Do_List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Moon+Dance&display=swap');
+
+        .font-fam {
+            font-family: "Moon Dance", serif;
+        }
+
+        .mySection {
+            background-image: url(./todo.webp);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: right;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mySection::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgb(249, 249, 165) 19%, rgba(255, 136, 8, 0) 100%);
+        }
+
+        #alert {
+            width: 15px;
+            height: 15px;
+            border: 1px dotted black;
+            border-radius: 50%;
+        }
+
+        .h-600 {
+            height: 600px;
+        }
+
+        #task-list {
+            overflow-y: auto;
+            max-height: 400px;
+            border: 2px dashed black;
+        }
+
+        .border-bottom {
+            border-bottom: 2px dotted black !important;
+        }
+
+        .c-pointer {
+            cursor: pointer;
+        }
+
+        .border-dotted {
+            border-left: 1px dotted black;
+            border-right: 1px dotted black;
+        }
+
+        .fs-sm {
+            font-size: 13px;
+        }
+
+        input,
+        select:focus {
+            box-shadow: none !important;
+        }
+
+        .box-shadow {
+            box-shadow: -8px 17px 10px rgba(0, 0, 0, 0.633);
+        }
+
+        @media (max-width: 992px) {
+            .mySection {
+                background-size: cover;
+            }
+        }
+
+        @media (max-width: 576px) {
+            #task-list {
+                overflow-x: auto;
+                /* Adjust as needed */
+                width: 100%;
+            }
+
+            #table {
+                min-width: 600px;
+                /* Ensure horizontal scrolling */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="mySection">
+        <div class="container position-relaitve z-1 h-600">
+            <div class="col-lg-7">
+                <div class="bg-white rounded box-shadow">
+                    <h3 class="text-uppercase text-center bg-warning py-2 rounded-top font-fam fw-bold">todo</h3>
+                    <div class="bg-white p-4">
+                        <div class="row gy-3">
+                            <div class="col-xl-6">
+                                <input type="text" class="form-control" id="input" placeholder="Enter your task">
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="d-flex justify-content-between align-items-center gap-2">
+                                    <select name="" id="priority" class="form-select">
+                                        <option value="-1" selected>Select priority</option>
+                                        <option value="1">Low</option>
+                                        <option value="2">Medium</option>
+                                        <option value="3">High</option>
+                                    </select>
+                                    <div id="alert"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn text-uppercase btn-success my-4 w-100 bg-gradient" id="addBtn">add
+                                task</button>
+                        </div>
+                        <div id="task-list" class="rounded">
+                            <table class="table m-0" id="table">
+                                <tr>
+                                    <td class="text-uppercase text-center fs-sm fw-bold">particular</td>
+                                    <td class="text-uppercase text-center w-25 fs-sm fw-bold border-dotted">priority
+                                    </td>
+                                    <td class="text-uppercase text-center w-25 fs-sm fw-bold">delete</td>
+                                </tr>
+                                <!-- list -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let input = document.getElementById("input")
+            let priority = document.getElementById("priority")
+            function getBgColor(val) {
+                switch (val) {
+                    case 1:
+                        return "primary"
+                    case 2:
+                        return "warning"
+                    case 3:
+                        return "danger"
+                }
+            }
+            $("#priority").on("change", function () {
+                let selectedPriority = parseInt($(this).val());
+                $("#alert").removeClass("bg-primary bg-warning bg-danger");
+                $("#alert").addClass(`bg-${getBgColor(selectedPriority)}`);
+            });
+            $("#addBtn").on("click", function () {
+                console.log(input.value)
+                if (input.value.trim() == "") {
+                    Swal.fire({
+                        title: 'Task must be added',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    })
+                } else if (priority.value == "-1") {
+                    Swal.fire({
+                        title: 'Please select priority',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    })
+                }
+                else {
+                    let obj = {
+                        title: input.value,
+                        priority: parseInt(priority.value)
+                    }
+                    let table = document.getElementById("table")
+                    table.innerHTML += `
+                                <tr class="table-${getBgColor(obj.priority)} border-bottom">
+                                    <td class="text-uppercase align-middle w-100  border-dotted">
+                                        <p class="text-uppercase m-0 font-fam fw-bold" id="title-task">
+                                            ${obj.title}
+                                        </p>
+                                    </td>
+                                    <td class="text-uppercase text-center w-25 align-middle  border-dotted">
+                                        <p class="text-uppercase m-0 bg-${getBgColor(obj.priority)} text-white rounded" id="color">
+                                            ${(priority.value == "1") ? "low" :
+                            (priority.value == "2") ? "medium" : "high"
+                        }
+                                        </p>
+                                    </td>
+                                    <td class="text-uppercase text-center w-25 align-middle  border-dotted">
+                                        <span class="fs-5 c-pointer">
+                                            <i class="ri-delete-bin-5-line"></i>
+                                        </span>
+                                    </td>
+                                </tr>
+                `
+                }
+            })
+        })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
