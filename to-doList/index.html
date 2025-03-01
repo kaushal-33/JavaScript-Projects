@@ -187,7 +187,6 @@
                 }
             });
             $("#addBtn").on("click", function () {
-                console.log(input.value)
                 if (input.value.trim() == "") {
                     Swal.fire({
                         title: 'Task must be added',
@@ -222,11 +221,11 @@
                                     </p>
                                 </td>
                                 <td class="text-uppercase text-center w-25 align-middle  border-dotted">
-                                    <p class="text-uppercase m-0 bg-${getBgColor(obj.priority)} text-white rounded" id="color">
+                                    <p class="text-uppercase m-0 bg-${getBgColor(obj.priority)} text-white rounded fs-sm" id="color">
                                         ${(obj.priority == "1") ? "low" : (obj.priority == "2") ? "medium" : "high"}
                                     </p>
                                 </td>
-                                <td class="text-uppercase text-center w-25 align-middle  border-dotted">
+                                <td class="text-uppercase text-center w-25 align-middle  border-dotted delete">
                                     <span class="fs-5 c-pointer">
                                         <i class="ri-delete-bin-5-line"></i>
                                     </span>
@@ -240,6 +239,11 @@
                     let alert = document.getElementById("alert")
                     alert.classList.remove("bg-primary", "bg-warning", "bg-danger");
                 }
+                let delBtn = document.querySelectorAll(".delete")
+
+                $(delBtn).on("click", function () {
+                    $(this).parent().remove();
+                })
             })
         })
     </script>
