@@ -167,18 +167,20 @@
         $(document).ready(function () {
             let arr = [];
             let option = document.getElementById("default");
-            let input = document.getElementById("input")
-            let priority = document.getElementById("priority")
+            let input = document.getElementById("input");
+            let priority = document.getElementById("priority");
+
             function getBgColor(val) {
                 switch (val) {
                     case 1:
-                        return "primary"
+                        return "primary";
                     case 2:
-                        return "warning"
+                        return "warning";
                     case 3:
-                        return "danger"
+                        return "danger";
                 }
             }
+
             $("#priority").on("change", function () {
                 let selectedPriority = parseInt($(this).val());
                 $("#alert").removeClass("bg-primary bg-warning bg-danger");
@@ -186,66 +188,65 @@
                     $("#alert").addClass(`bg-${getBgColor(selectedPriority)}`);
                 }
             });
+
+            function renderTasks() {
+                let table = document.getElementById("table");
+                table.innerHTML = "";
+
+                arr.forEach((obj, idx) => {
+                    table.innerHTML += `
+                        <tr class="table-${getBgColor(obj.priority)} border-bottom" data-index="${idx}">
+                            <td class="text-uppercase align-middle w-100 border-dotted">
+                                <p class="text-uppercase m-0 font-fam fw-bold">${obj.title}</p>
+                            </td>
+                            <td class="text-uppercase text-center w-25 align-middle border-dotted">
+                                <p class="text-uppercase m-0 bg-${getBgColor(obj.priority)} text-white rounded fs-sm">
+                                    ${(obj.priority == "1") ? "low" : (obj.priority == "2") ? "medium" : "high"}
+                                </p>
+                            </td>
+                            <td class="text-uppercase text-center w-25 align-middle border-dotted delete c-pointer" data-index="${idx}">
+                                <span class="fs-5">
+                                    <i class="ri-delete-bin-5-line"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    `;
+                });
+                $(".delete").on("click", function () {
+                    let index = $(this).attr("data-index");
+                    arr.splice(index, 1);
+                    renderTasks();
+                });
+            }
+
             $("#addBtn").on("click", function () {
                 if (input.value.trim() == "") {
                     Swal.fire({
                         title: 'Task must be added',
                         icon: 'warning',
                         confirmButtonText: 'OK'
-                    })
+                    });
                 } else if (priority.value == "-1") {
                     Swal.fire({
                         title: 'Please select priority',
                         icon: 'error',
                         confirmButtonText: 'OK'
-                    })
-                }
-                else {
+                    });
+                } else {
                     let obj = {
                         title: input.value,
                         priority: parseInt(priority.value)
-                    }
-
-                    let table = document.getElementById("table")
+                    };
 
                     arr.push(obj);
-
-                    table.innerHTML = "";
-
-                    arr.forEach((obj, idx) => {
-                        table.innerHTML += `
-                            <tr class="table-${getBgColor(obj.priority)} border-bottom">
-                                <td class="text-uppercase align-middle w-100  border-dotted">
-                                    <p class="text-uppercase m-0 font-fam fw-bold" id="title-task">
-                                        ${obj.title}
-                                    </p>
-                                </td>
-                                <td class="text-uppercase text-center w-25 align-middle  border-dotted">
-                                    <p class="text-uppercase m-0 bg-${getBgColor(obj.priority)} text-white rounded fs-sm" id="color">
-                                        ${(obj.priority == "1") ? "low" : (obj.priority == "2") ? "medium" : "high"}
-                                    </p>
-                                </td>
-                                <td class="text-uppercase text-center w-25 align-middle  border-dotted delete">
-                                    <span class="fs-5 c-pointer">
-                                        <i class="ri-delete-bin-5-line"></i>
-                                    </span>
-                                </td>
-                            </tr>
-                        `
-                    });
+                    renderTasks();
 
                     input.value = "";
                     option.selected = true;
-                    let alert = document.getElementById("alert")
-                    alert.classList.remove("bg-primary", "bg-warning", "bg-danger");
+                    $("#alert").removeClass("bg-primary bg-warning bg-danger");
                 }
-                let delBtn = document.querySelectorAll(".delete")
-
-                $(delBtn).on("click", function () {
-                    $(this).parent().remove();
-                })
-            })
-        })
+            });
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
