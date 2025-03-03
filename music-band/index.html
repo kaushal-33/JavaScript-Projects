@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music_Band</title>
+    <!-- bS link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Moon+Dance&display=swap');
+
+        .font-fam {
+            font-family: "Moon Dance", serif;
+        }
+
+        .tap-box {
+            width: 100px;
+            height: 100px;
+            box-shadow: 0px 5px 10px black;
+            user-select: none;
+        }
+
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(9.5px);
+            -webkit-backdrop-filter: blur(9.5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .fs-sm {
+            font-size: 14px;
+        }
+
+        .active {
+            box-shadow: inset 0px 5px 10px black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="vh-100 d-flex align-items-center justify-content-center position-relaitve">
+        <video src="./video/65774-515379441.mp4" class="position-fixed w-100" autoplay="true" loop="true"></video>
+        <div class="position-relaitve z-1 container box p-5">
+            <h1 class="text-uppercase text-center mb-5 fw-bold">drum-kit</h1>
+            <div class="row gap-3 gy-2 justify-content-center">
+                <div class="tap-box text-uppercase fw-bold fs-4 d-flex align-items-center justify-content-center flex-column"
+                    data-key="65">
+                    a <span class="text-uppercase text-white fs-sm font-fam">clap</span></div>
+                <div class="tap-box text-uppercase fw-bold fs-4 d-flex align-items-center justify-content-center flex-column"
+                    data-key="83">
+                    s <span class="text-uppercase text-white fs-sm font-fam">hit-hat</span></div>
+                <div class="tap-box text-uppercase fw-bold fs-4 d-flex align-items-center justify-content-center flex-column"
+                    data-key="68">
+                    d <span class="text-uppercase text-white fs-sm font-fam">kick</span></div>
+                <div class="tap-box text-uppercase fw-bold fs-4 d-flex align-items-center justify-content-center flex-column"
+                    data-key="70">
+                    f <span class="text-uppercase text-white fs-sm font-fam">open-hat</span></div>
+                <div class="tap-box text-uppercase fw-bold fs-4 d-flex align-items-center justify-content-center flex-column"
+                    data-key="71">
+                    g <span class="text-uppercase text-white fs-sm font-fam">boom</span></div>
+                <div class="tap-box text-uppercase fw-bold fs-4 d-flex align-items-center justify-content-center flex-column"
+                    data-key="72">
+                    h <span class="text-uppercase text-white fs-sm font-fam">ride</span></div>
+                <div class="tap-box text-uppercase fw-bold fs-4 d-flex align-items-center justify-content-center flex-column"
+                    data-key="74">
+                    j <span class="text-uppercase text-white fs-sm font-fam">snare</span></div>
+                <div class="tap-box text-uppercase fw-bold fs-4 d-flex align-items-center justify-content-center flex-column"
+                    data-key="75">
+                    k <span class="text-uppercase text-white fs-sm font-fam">tom</span></div>
+                <div class="tap-box text-uppercase fw-bold fs-4 d-flex align-items-center justify-content-center flex-column"
+                    data-key="76">
+                    l <span class="text-uppercase text-white fs-sm font-fam">tink</span></div>
+            </div>
+        </div>
+    </section>
+    <audio data-key="65" src="./audio/clap.wav"></audio>
+
+    <audio data-key="83" src="audio/hihat.wav"></audio>
+
+    <audio data-key="68" src="audio/kick.wav"></audio>
+
+    <audio data-key="70" src="audio/openhat.wav"></audio>
+
+    <audio data-key="71" src="audio/boom.wav"></audio>
+
+    <audio data-key="72" src="audio/ride.wav"></audio>
+
+    <audio data-key="74" src="audio/snare.wav"></audio>
+
+    <audio data-key="75" src="audio/tom.wav"></audio>
+
+    <audio data-key="76" src="audio/tink.wav"></audio>
+
+    <script>
+        function playSound(e) {
+            let keyCode = e.type === "keydown" ? e.keyCode : this.getAttribute("data-key");
+            const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+            const key = document.querySelector(`.tap-box[data-key="${keyCode}"]`);
+
+            if (!audio) return;
+            audio.currentTime = 0;
+            audio.play();
+            key.classList.add("active");
+            setTimeout(() => key.classList.remove("active"), 100);
+        }
+
+        document.addEventListener("keydown", playSound);
+        const clicked = document.querySelectorAll(".tap-box");
+        clicked.forEach((box) => {
+            box.addEventListener("click", playSound)
+        })
+    </script>
+
+</body>
+
+</html>
