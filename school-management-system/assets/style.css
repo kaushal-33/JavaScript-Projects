@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Moon+Dance&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Moon Dance", cursive;
+}
+
+section {
+    background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #5F99AE;
+}
+
+h6 {
+    color: #693382;
+    font-family: "Playfair Display", serif;
+    letter-spacing: 10px;
+    font-size: 25px;
+}
+
+input {
+    background-color: #336D82 !important;
+    outline: none !important;
+    border: none !important;
+}
+
+input::placeholder {
+    color: #ccc !important;
+}
+
+input:focus {
+    box-shadow: none !important;
+    border: none !important;
+    outline: none;
+}
+
+th,
+td {
+    border-bottom: 1px solid #ddd;
+}
+
+td{
+    font-family: "Playfair Display", serif;
+    letter-spacing: 5px;
+}
+
+th {
+    letter-spacing: 5px;
+    background-color: #5F99AE;
+    color: white;
+}
+
+.submit-btn {
+    background-color: #693382;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+    color: #ccc;
+}
+
+.submit-btn:hover {
+    color: #ccc;
+    background-color: #5A2B6E !important;
+}
