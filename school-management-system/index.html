@@ -105,6 +105,10 @@
             addBtn.classList.add("btn-warning");
         }
 
+        function isDuplicateGrID(id) {
+            return school.some((student) => student.grID === id);
+        }
+
         addBtn.addEventListener("click", function () {
             if (!grID.value || !fullName.value || !email.value || !contact.value) {
                 Swal.fire({
@@ -127,8 +131,17 @@
                 addBtn.classList.remove("btn-warning");
                 addBtn.classList.add("submit-btn");
             } else {
+                if (isDuplicateGrID(grID.value)) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Duplicate GR ID",
+                        text: "GR ID must be unique!"
+                    });
+                    return;
+                }
                 // Otherwise, add a new student
                 school.push(newStudent);
+                let size = school.length
             }
 
             renderTask();
