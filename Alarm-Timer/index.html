@@ -10,7 +10,7 @@
     <style>
         .circle {
             width: 600px;
-            height: 600px;
+            aspect-ratio: 1;
             background-image: url(./watch.png);
             background-size: contain;
             background-repeat: no-repeat;
@@ -42,8 +42,32 @@
             margin: 0;
         }
 
-        h1 {
-            font-size: 3rem;
+
+        @media (max-width: 600px) {
+            .circle {
+                width: 100%;
+                aspect-ratio: 1;
+                background-image: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .c1 {
+                position: static;
+                border: 10px dashed black;
+            }
+
+            .pt-5 {
+                padding-top: 50px;
+            }
+
+        }
+
+        @media (max-width: 350px) {
+            input {
+                width: 60px;
+            }
         }
     </style>
 </head>
@@ -109,8 +133,68 @@
                         totalSeconds--;
                         display.innerHTML = formatTime(totalSeconds);
                     } else {
+                        const count = 200,
+                            defaults = {
+                                origin: { y: 0.7 },
+                            };
+
+                        function fire(particleRatio, opts) {
+                            confetti(
+                                Object.assign({}, defaults, opts, {
+                                    particleCount: Math.floor(count * particleRatio),
+                                })
+                            );
+                        }
+
+                        fire(0.25, {
+                            spread: 26,
+                            startVelocity: 55,
+                        });
+
+                        fire(0.2, {
+                            spread: 60,
+                        });
+
+                        fire(0.35, {
+                            spread: 100,
+                            decay: 0.91,
+                            scalar: 0.8,
+                        });
+
+                        fire(0.1, {
+                            spread: 120,
+                            startVelocity: 25,
+                            decay: 0.92,
+                            scalar: 1.2,
+                        });
+
+                        fire(0.1, {
+                            spread: 120,
+                            startVelocity: 45,
+                        });
                         clearInterval(timer);
-                        alert("Time's up!");
+
+                        Swal.fire({
+                            title: "Programming isn't about what you know; it's about what you can figure out.",
+                            showClass: {
+                                popup: `
+                                                animate__animated
+                                                animate__fadeInUp
+                                                animate__faster
+                                                `
+                            },
+                            hideClass: {
+                                popup: `
+                                    animate__animated
+                                    animate__fadeOutDown
+                                    animate__faster
+                                    `
+                            }
+                        });
+
+                        hourInput.value = "";
+                        minuteInput.value = "";
+                        secondInput.value = "";
                     }
                 }
             }, 1000);
@@ -144,6 +228,8 @@
         pauseResumeBtn.addEventListener("click", togglePauseResume);
         document.getElementById("reset").addEventListener("click", resetTimer);
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 
