@@ -11,17 +11,20 @@
 </head>
 
 <body>
-
     <section>
         <aside>
-            <div class="display-1 text-muted">
+            <div class="display-1">
                 <i class="ri-school-line"></i>
             </div>
             <div>
                 <input type="number" id="grID" class="text-uppercase" placeholder="GRID" required>
+                <p class="text-start text-danger d-none" id="grid-alert">GRID already exists!</p>
                 <input type="text" id="full-name" class="text-uppercase" placeholder="Full Name" required>
                 <input type="email" id="email" class="text-uppercase" placeholder="Email" required>
+                <p class="text-start text-danger d-none" id="email-alert">Email already exists!</p>
                 <input type="number" id="contact" class="text-uppercase" placeholder="Contact" required>
+                <p class="text-start text-danger d-none" id="contact-alert">Contact already exists!</p>
+                <p class="text-start text-danger d-none" id="contact-alert2">Contact must be 10 digits!</p>
                 <button type="button" class="submit-btn btn text-uppercase w-100" id="addBtn">Add</button>
             </div>
         </aside>
@@ -32,11 +35,11 @@
                 <table id="dataTable">
                     <thead>
                         <tr>
-                            <th class="text-uppercase">#GRID</th>
-                            <th class="text-uppercase">Full Name</th>
-                            <th class="text-uppercase">Email</th>
-                            <th class="text-uppercase">Contact</th>
-                            <th class="text-end text-uppercase">Action</th>
+                            <th>#GRID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th class="text-end">Action</th>
                         </tr>
                     </thead>
                     <tbody id="table"></tbody>
@@ -44,115 +47,7 @@
             </div>
         </div>
     </section>
-    <script>
-        let grID = document.getElementById("grID");
-        let fullName = document.getElementById("full-name");
-        let email = document.getElementById("email");
-        let contact = document.getElementById("contact");
-        let addBtn = document.getElementById("addBtn");
-
-        class Student {
-            constructor(grID, name, email, contact) {
-                this.grID = grID;
-                this.name = name;
-                this.email = email;
-                this.contact = contact;
-            }
-        }
-
-        let school = [];
-        let editIndex = null; // To track which student is being edited
-
-        function renderTask() {
-            let table = document.getElementById("table");
-            table.innerHTML = "";
-            school.forEach(function (student, index) {
-                table.innerHTML += `
-                <tr class="">
-                    <td class="py-1 ps-3">#${student.grID}</td>
-                    <td class="text-capitalize py-1 ps-3">${student.name}</td>                            
-                    <td class="py-1 ps-3">${student.email}</td>
-                    <td class="py-1 ps-3">${student.contact}</td>
-                    <td class="py-1 d-flex justify-content-end gap-3 px-3">
-                        <button class="px-2 btn btn-success view-btn"><i class="ri-eye-line"></i></button>
-                        <button class="px-2 btn btn-warning edit-btn" onclick="editStudent(${index})"><i class="ri-image-edit-line"></i></button>
-                        <button class="px-2 btn btn-danger del-btn" onclick="deleteStudent(${index})"><i class="ri-delete-bin-2-line"></i></button>
-                    </td>
-                </tr>`;
-            });
-        }
-
-        function deleteStudent(index) {
-            if (confirm("Are you sure you want to delete this student?")) {
-                school.splice(index, 1);
-                renderTask();
-            }
-        }
-
-        function editStudent(index) {
-            // Populate form with the existing values
-            grID.value = school[index].grID;
-            fullName.value = school[index].name;
-            email.value = school[index].email;
-            contact.value = school[index].contact;
-
-            // Track the student being edited
-            editIndex = index;
-
-            // Change button text to "Update"
-            addBtn.innerHTML = "Update";
-            addBtn.classList.remove("submit-btn");
-            addBtn.classList.add("btn-warning");
-        }
-
-        function isDuplicateGrID(id) {
-            return school.some((student) => student.grID === id);
-        }
-
-        addBtn.addEventListener("click", function () {
-            if (!grID.value || !fullName.value || !email.value || !contact.value) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Please fill out all the forms before submitting",
-                });
-                return;
-            }
-
-            let newStudent = new Student(grID.value, fullName.value, email.value, contact.value);
-
-            if (editIndex !== null) {
-                // If editing, update the existing entry
-                school[editIndex] = newStudent;
-                editIndex = null; // Reset edit mode
-
-                // Reset the button state after updating
-                addBtn.innerHTML = "Add";
-                addBtn.classList.remove("btn-warning");
-                addBtn.classList.add("submit-btn");
-            } else {
-                if (isDuplicateGrID(grID.value)) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Duplicate GR ID",
-                        text: "GR ID must be unique!"
-                    });
-                    return;
-                }
-                // Otherwise, add a new student
-                school.push(newStudent);
-                let size = school.length
-            }
-
-            renderTask();
-
-            grID.value = "";
-            fullName.value = "";
-            email.value = "";
-            contact.value = "";
-        });
-
-    </script>
+    <script src="./assets/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
