@@ -80,10 +80,6 @@ aside input {
     z-index: 2;
 }
 
-aside input::placeholder{
-    
-}
-
 aside input:focus {
     outline: none;
     border-color: #8F87F1;
