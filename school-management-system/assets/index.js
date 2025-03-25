@@ -56,10 +56,34 @@ function renderTask() {
 }
 
 function deleteStudent(index) {
-    if (confirm("Are you sure you want to delete this student?")) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        grID.value = "";
+        fullName.value = "";
+        email.value = "";
+        contact.value = "";
+        addBtn.innerHTML = "Add";
+        addBtn.classList.remove("btn-warning");
+        addBtn.classList.add("submit-btn");
         school.splice(index, 1);
         renderTask();
-    }
+        if (result.isConfirmed) {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Deleted Successfuly",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    })
 }
 
 function editStudent(index) {

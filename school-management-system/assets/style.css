@@ -208,7 +208,16 @@ tbody tr:hover {
 }
 
 .shadow {
-    box-shadow: 0 0 10px red !important;
+    box-shadow: 0 0 10px red inset !important;
+}
+
+p.text-danger{
+    background-color: white;
+    display: inline-block;
+    padding: 5px 10px;
+    margin-top: 5px;
+    border-radius:0 50px 50px 50px;
+    border: 1px dashed red;
 }
 
 /* Animation */
