@@ -10,8 +10,8 @@
     <style>
         section {
             background-color: #CDDCDC;
-            background-image: radial-gradient(at 50% 100%, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%);
-            background-blend-mode: screen, overlay;
+            background: rgb(34, 193, 195);
+            background: linear-gradient(0deg, rgb(255, 255, 255) 40%, rgba(45, 253, 220, 0.691841702501313) 40%);
         }
 
         .circle {
@@ -27,7 +27,7 @@
         .c1 {
             width: 400px;
             aspect-ratio: 1;
-            background-color: white;
+            background: linear-gradient(0deg, rgb(140, 244, 227) 50%,rgb(255, 255, 255) 80% );
             border-radius: 50%;
             position: absolute;
             bottom: 37px;
@@ -41,6 +41,14 @@
             padding: 10px;
             font-size: 18px;
             text-align: center;
+            border-radius: 50px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7) inset;
+            border: none !important;
+        }
+
+        input:focus {
+            box-shadow: 0px 0px 10px black !important;
+            outline: none !important;
         }
 
         input::-webkit-outer-spin-button,
@@ -50,8 +58,24 @@
         }
 
         h1 {
-            box-shadow: 0 0 10px black inset;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7) inset;
             border-radius: 50px;
+            background-color: white;
+        }
+
+        .btn {
+            width: 70px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            box-shadow: 0 0 5px black inset;
+        }
+
+        #start {
+            background-color: rgba(8, 235, 8, 0.5);
+        }
+
+        #reset {
+            background-color: rgba(255, 255, 0, 0.5);
         }
 
         @media (max-width: 600px) {
@@ -97,11 +121,13 @@
                         <span class="fs-1">:</span>
                         <input type="number" id="second" placeholder="SS" min="0" max="59">
                     </div>
-                    <h1 class="text-center my-3 text-danger" id="timer-display">00 : 00 : 00</h1>
+                    <h1 class="text-center my-3 text-primary" id="timer-display">00 : 00 : 00</h1>
 
-                    <button class="btn btn-success" id="start">Start</button>
-                    <button class="btn btn-warning mx-2" id="pause-resume">Pause</button>
-                    <button class="btn btn-danger" id="reset">Reset</button>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button class="btn fs-2" id="start"><i class="ri-play-circle-line"></i></button>
+                        <!-- <button class="btn btn-warning mx-2" id="pause-resume">Pause</button> -->
+                        <button class="btn fs-3" id="reset"><i class="ri-reset-left-line"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -112,133 +138,103 @@
         let minuteInput = document.getElementById("minute");
         let secondInput = document.getElementById("second");
         let display = document.getElementById("timer-display");
-        let pauseResumeBtn = document.getElementById("pause-resume")
+        let startBtn = document.getElementById("start");
 
         let timer;
         let totalSeconds = 0;
+        let isRunning = false;
         let isPaused = false;
+
         function formatTime(seconds) {
             let hrs = Math.floor(seconds / 3600);
             let mins = Math.floor((seconds % 3600) / 60);
             let secs = seconds % 60;
-
             return `${String(hrs).padStart(2, "0")} : ${String(mins).padStart(2, "0")} : ${String(secs).padStart(2, "0")}`;
         }
+
         function startTimer() {
-            totalSeconds =
-                (parseInt(hourInput.value) || 0) * 3600 +
-                (parseInt(minuteInput.value) || 0) * 60 +
-                (parseInt(secondInput.value) || 0);
+            if (!isRunning) {
+                totalSeconds =
+                    (parseInt(hourInput.value) || 0) * 3600 +
+                    (parseInt(minuteInput.value) || 0) * 60 +
+                    (parseInt(secondInput.value) || 0);
 
-            if (totalSeconds <= 0) {
-                alert("Please enter a valid time.");
-                return;
-            }
+                if (totalSeconds <= 0) {
+                    alert("Please enter a valid time.");
+                    return;
+                }
 
-            isPaused = false;
-            clearInterval(timer);
+                isRunning = true;
+                isPaused = false;
+                startBtn.innerHTML = `<i class="ri-pause-circle-fill"></i>`;
+                startBtn.style.backgroundColor = "rgba(255, 166, 0, 0.5)";
 
-            timer = setInterval(() => {
-                if (!isPaused) {
-                    if (totalSeconds > 0) {
-                        totalSeconds--;
+                timer = setInterval(() => {
+                    if (!isPaused && totalSeconds >= 0) {
                         display.innerHTML = formatTime(totalSeconds);
-                    } else {
+                        totalSeconds--;
+                    } else if (totalSeconds <= 0) {
+                        clearInterval(timer);
+                        isRunning = false;
+                        startBtn.innerHTML = `<i class="ri-play-circle-line"></i>`;
+                        startBtn.style.backgroundColor = "rgba(8, 235, 8, 0.5)";
+
+                        // Fire confetti animation
                         const count = 200,
-                            defaults = {
-                                origin: { y: 0.7 },
-                            };
+                            defaults = { origin: { y: 0.7 } };
 
                         function fire(particleRatio, opts) {
-                            confetti(
-                                Object.assign({}, defaults, opts, {
-                                    particleCount: Math.floor(count * particleRatio),
-                                })
-                            );
+                            confetti(Object.assign({}, defaults, opts, {
+                                particleCount: Math.floor(count * particleRatio),
+                            }));
                         }
 
-                        fire(0.25, {
-                            spread: 26,
-                            startVelocity: 55,
-                        });
-
-                        fire(0.2, {
-                            spread: 60,
-                        });
-
-                        fire(0.35, {
-                            spread: 100,
-                            decay: 0.91,
-                            scalar: 0.8,
-                        });
-
-                        fire(0.1, {
-                            spread: 120,
-                            startVelocity: 25,
-                            decay: 0.92,
-                            scalar: 1.2,
-                        });
-
-                        fire(0.1, {
-                            spread: 120,
-                            startVelocity: 45,
-                        });
-                        clearInterval(timer);
+                        fire(0.25, { spread: 26, startVelocity: 55 });
+                        fire(0.2, { spread: 60 });
+                        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+                        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+                        fire(0.1, { spread: 120, startVelocity: 45 });
 
                         Swal.fire({
-                            title: "Programming isn't about what you know; it's about what you can figure out.",
-                            showClass: {
-                                popup: `
-                                                animate__animated
-                                                animate__fadeInUp
-                                                animate__faster
-                                                `
-                            },
-                            hideClass: {
-                                popup: `
-                                    animate__animated
-                                    animate__fadeOutDown
-                                    animate__faster
-                                    `
-                            }
+                            text: "Programming isn't about what you know; it's about what you can figure out."
                         });
 
                         hourInput.value = "";
                         minuteInput.value = "";
                         secondInput.value = "";
                     }
-                }
-            }, 1000);
+                }, 1000);
+            }
         }
 
         function togglePauseResume() {
-            isPaused = !isPaused;
-
-            if (isPaused) {
-                pauseResumeBtn.innerHTML = "Resume";
-                pauseResumeBtn.classList.remove("btn-warning");
-                pauseResumeBtn.classList.add("btn-primary");
+            if (isRunning) {
+                isPaused = !isPaused;
+                startBtn.innerHTML = isPaused ? `<i class="ri-play-circle-line"></i>` : `<i class="ri-pause-circle-fill"></i>`;
+                startBtn.style.backgroundColor = isPaused ? `rgba(0, 0, 255, 0.5)` : "rgba(255, 166, 0, 0.5)";
             } else {
-                pauseResumeBtn.innerHTML = "Pause";
-                pauseResumeBtn.classList.remove("btn-primary");
-                pauseResumeBtn.classList.add("btn-warning");
+                startTimer();
             }
         }
 
         function resetTimer() {
             clearInterval(timer);
+            isRunning = false;
+            isPaused = false;
             totalSeconds = 0;
             display.innerHTML = "00 : 00 : 00";
             hourInput.value = "";
             minuteInput.value = "";
             secondInput.value = "";
+            startBtn.innerHTML = `<i class="ri-play-circle-line"></i>`;
+            startBtn.style.backgroundColor = "rgba(8, 235, 8, 0.5)";
         }
 
-        // Event listeners for the buttons
-        document.getElementById("start").addEventListener("click", startTimer);
-        pauseResumeBtn.addEventListener("click", togglePauseResume);
+        // Event Listeners
+        startBtn.addEventListener("click", togglePauseResume);
         document.getElementById("reset").addEventListener("click", resetTimer);
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
