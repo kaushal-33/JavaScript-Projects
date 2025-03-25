@@ -27,13 +27,13 @@
         .c1 {
             width: 400px;
             aspect-ratio: 1;
-            background: linear-gradient(0deg, rgb(140, 244, 227) 50%,rgb(255, 255, 255) 80% );
+            background: linear-gradient(0deg, rgb(140, 244, 227) 50%, rgb(255, 255, 255) 80%);
             border-radius: 50%;
             position: absolute;
             bottom: 37px;
             right: 100px;
             box-shadow: 0px 0px 20px black inset;
-            border: 2px solid rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(0, 0, 0, 1);
         }
 
         input {
@@ -43,12 +43,7 @@
             text-align: center;
             border-radius: 50px;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7) inset;
-            border: none !important;
-        }
-
-        input:focus {
-            box-shadow: 0px 0px 10px black !important;
-            outline: none !important;
+            border: 2px solid black;
         }
 
         input::-webkit-outer-spin-button,
@@ -61,21 +56,22 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.7) inset;
             border-radius: 50px;
             background-color: white;
+            border: 2px solid black;
         }
 
         .btn {
             width: 70px;
             aspect-ratio: 1;
             border-radius: 50%;
-            box-shadow: 0 0 5px black inset;
+            border: 2px solid black;
         }
 
         #start {
-            background-color: rgba(8, 235, 8, 0.5);
+            background-color: rgba(8, 235, 8, 1);
         }
 
         #reset {
-            background-color: rgba(255, 255, 0, 0.5);
+            background-color: rgba(255, 255, 0, 1);
         }
 
         @media (max-width: 600px) {
@@ -134,6 +130,16 @@
     </section>
 
     <script>
+        let quotesArr = [
+            { text: "First, solve the problem. Then, write the code." },
+            { text: "The only way to learn a new programming language is by writing programs in it." },
+            { text: "In programming, the hard part isn't solving problems, but deciding what problems to solve." },
+            { text: "Web development is not just about building websites; it’s about building dreams that come to life on the internet." },
+            { text: "Programming is not just writing code; it’s solving problems." },
+            { text: "In web development, there's no such thing as 'good enough. There's always something to improve, optimize, and refactor." },
+            { text: "You don't have to be a genius to program, but you do need to have the curiosity to always keep learning." },
+            { text: "Programming isn't about what you know; it's about what you can figure out." },
+        ]
         let hourInput = document.getElementById("hour");
         let minuteInput = document.getElementById("minute");
         let secondInput = document.getElementById("second");
@@ -160,14 +166,18 @@
                     (parseInt(secondInput.value) || 0);
 
                 if (totalSeconds <= 0) {
-                    alert("Please enter a valid time.");
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Please input valid time",
+                    });
                     return;
                 }
 
                 isRunning = true;
                 isPaused = false;
                 startBtn.innerHTML = `<i class="ri-pause-circle-fill"></i>`;
-                startBtn.style.backgroundColor = "rgba(255, 166, 0, 0.5)";
+                startBtn.style.backgroundColor = "rgba(255, 166, 0, 1)";
 
                 timer = setInterval(() => {
                     if (!isPaused && totalSeconds >= 0) {
@@ -177,7 +187,7 @@
                         clearInterval(timer);
                         isRunning = false;
                         startBtn.innerHTML = `<i class="ri-play-circle-line"></i>`;
-                        startBtn.style.backgroundColor = "rgba(8, 235, 8, 0.5)";
+                        startBtn.style.backgroundColor = "rgba(8, 235, 8, 1)";
 
                         // Fire confetti animation
                         const count = 200,
@@ -196,8 +206,9 @@
                         fire(0.1, { spread: 120, startVelocity: 45 });
 
                         Swal.fire({
-                            text: "Programming isn't about what you know; it's about what you can figure out."
+                            text: `"${quotesArr[Math.floor(Math.random() * quotesArr.length)].text}"`
                         });
+
 
                         hourInput.value = "";
                         minuteInput.value = "";
@@ -211,7 +222,7 @@
             if (isRunning) {
                 isPaused = !isPaused;
                 startBtn.innerHTML = isPaused ? `<i class="ri-play-circle-line"></i>` : `<i class="ri-pause-circle-fill"></i>`;
-                startBtn.style.backgroundColor = isPaused ? `rgba(0, 0, 255, 0.5)` : "rgba(255, 166, 0, 0.5)";
+                startBtn.style.backgroundColor = isPaused ? `rgba(0, 0, 255, 0.7)` : "rgba(255, 166, 0, 1)";
             } else {
                 startTimer();
             }
