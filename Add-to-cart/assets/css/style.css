@@ -1,0 +1,97 @@
+* {
+    list-style: none !important;
+    text-decoration: none !important;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.logo {
+    max-width: 200px;
+}
+
+.bg-1{
+    background-image: url(../images/car1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-block: 100px;
+
+}
+.bg-2{
+    background-image: url(../images/car2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-block: 100px;
+
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card img {
+    object-fit: contain;
+    height: 200px; 
+}
+
+.card .d-flex {
+    margin-top: auto; 
+}
+
+
+.swiper-pagination span{
+    background-color: #ffc107;
+    width: 15px;
+    height: 15px;
+}
+
+.fs-sm{
+    font-size: 14px;
+    line-height: 20px;
+}
+
+#buy-now{
+    transition: .2s all ease-in-out;
+}
+
+#buy-now:hover{
+    background-color: #ffc107;
+    box-shadow: 0 0 2px black inset;
+}
+#to-cart{
+    transition: .2s all ease-in-out;
+}
+
+#to-cart:hover{
+    background-color: #ffc107;
+    box-shadow: 0 0 2px black inset;
+}
+
+.card{
+    transition: .3s all ease-in-out;
+}
+
+.card:hover{
+    border: 1px solid #ffc107 !important;
+}
+
+/* responsive */
+@media (max-width:380px) {
+    nav ul li a{
+        font-size: 13px !important;
+    }
+}
+@media (max-width:576px) {
+    .bg-1{
+        padding-block: 50px;
+    }
+    .bg-2{
+        padding-block: 50px;
+    }
+    .swiper-pagination span{
+        width: 10px;
+        height: 10px;
+    }
+}
