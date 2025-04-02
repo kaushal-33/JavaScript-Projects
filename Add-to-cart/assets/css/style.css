@@ -8,7 +8,7 @@
     max-width: 200px;
 }
 
-.bg-1{
+.bg-1 {
     background-image: url(../images/car1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -16,7 +16,8 @@
     padding-block: 100px;
 
 }
-.bg-2{
+
+.bg-2 {
     background-image: url(../images/car2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -33,64 +34,104 @@
 
 .card img {
     object-fit: contain;
-    height: 200px; 
+    height: 200px;
 }
 
 .card .d-flex {
-    margin-top: auto; 
+    margin-top: auto;
 }
 
 
-.swiper-pagination span{
+.swiper-pagination span {
     background-color: #ffc107;
     width: 15px;
     height: 15px;
 }
 
-.fs-sm{
+.fs-sm {
     font-size: 14px;
     line-height: 20px;
 }
 
-#buy-now{
+.buy-now {
     transition: .2s all ease-in-out;
 }
 
-#buy-now:hover{
-    background-color: #ffc107;
-    box-shadow: 0 0 2px black inset;
-}
-#to-cart{
-    transition: .2s all ease-in-out;
-}
-
-#to-cart:hover{
+.buy-now:hover {
     background-color: #ffc107;
     box-shadow: 0 0 2px black inset;
 }
 
-.card{
+.to-cart {
+    transition: .2s all ease-in-out;
+}
+
+.to-cart:hover {
+    background-color: #ffc107;
+    box-shadow: 0 0 2px black inset;
+}
+
+.card {
     transition: .3s all ease-in-out;
 }
 
-.card:hover{
-    border: 1px solid #ffc107 !important;
+.card:hover {
+    border: 2px solid #ffc107 !important;
+}
+
+.cart-badge {
+    width: 20px;
+    height: 20px;
+    background-color: #ffc107;
+    border-radius: 50%;
+    top: -6px;
+    font-size: 12px;
+    left: -12px;
+}
+
+.nav-item a {
+    transition: .2s all linear;
+}
+
+.nav-item:hover a {
+    text-shadow: -1px -1px 0px rgb(0, 0, 0);
+}
+
+.checkout-box {
+    width: 300px;
+    left: -295px;
+    top: 30px;
+    border-radius: 10px 0px 10px 10px;
+}
+
+.checkout-img {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.very-fs-sm {
+    font-size: 12px;
 }
 
 /* responsive */
 @media (max-width:380px) {
-    nav ul li a{
+    nav ul li a {
         font-size: 13px !important;
     }
 }
+
 @media (max-width:576px) {
-    .bg-1{
+    .bg-1 {
         padding-block: 50px;
     }
-    .bg-2{
+
+    .bg-2 {
         padding-block: 50px;
     }
-    .swiper-pagination span{
+
+    .swiper-pagination span {
         width: 10px;
         height: 10px;
     }
