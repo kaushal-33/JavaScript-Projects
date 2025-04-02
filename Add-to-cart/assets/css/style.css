@@ -115,6 +115,17 @@
     font-size: 12px;
 }
 
+.quantity-btn{
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: #ffc107;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 /* responsive */
 @media (max-width:380px) {
     nav ul li a {
