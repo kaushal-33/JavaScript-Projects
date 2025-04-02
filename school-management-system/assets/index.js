@@ -65,16 +65,17 @@ function deleteStudent(index) {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
     }).then((result) => {
-        grID.value = "";
-        fullName.value = "";
-        email.value = "";
-        contact.value = "";
-        addBtn.innerHTML = "Add";
-        addBtn.classList.remove("btn-warning");
-        addBtn.classList.add("submit-btn");
-        school.splice(index, 1);
-        renderTask();
+
         if (result.isConfirmed) {
+            grID.value = "";
+            fullName.value = "";
+            email.value = "";
+            contact.value = "";
+            addBtn.innerHTML = "Add";
+            addBtn.classList.remove("btn-warning");
+            addBtn.classList.add("submit-btn");
+            school.splice(index, 1);
+            renderTask();
             Swal.fire({
                 position: "top-end",
                 icon: "success",
