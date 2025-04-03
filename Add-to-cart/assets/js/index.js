@@ -87,26 +87,28 @@ let productArr = [{
 let productContainer = document.getElementById("car-parts")
 let cartArr = JSON.parse(localStorage.getItem("cartArray")) || [];
 let counter = document.getElementById("item-counter")
+
 counter.innerHTML = cartArr.length
 function addToCart(productID) {
     let item = productArr.find((obj) => { return obj.id == productID })
     let itemIndex = cartArr.findIndex((obj) => { return obj.id == productID })
     if (itemIndex != -1) {
-        cartArr[itemIndex].quantity++;
+        Swal.fire("Item already added to cart 🛒");
     } else {
         item.quantity = 1
         cartArr.push(item)
+        Swal.fire({
+            position: "top-end",
+            toast: true,
+            icon: "success",
+            title: "Item added to cart.",
+            showConfirmButton: false,
+            timer: 1500
+        });
     }
+    
     localStorage.setItem("cartArray", JSON.stringify(cartArr))
     counter.innerHTML = cartArr.length
-    Swal.fire({
-        position: "top-end",
-        toast: true,
-        icon: "success",
-        title: "Item added to cart.",
-        showConfirmButton: false,
-        timer: 1500
-    });
 }
 
 function getStars(num) {

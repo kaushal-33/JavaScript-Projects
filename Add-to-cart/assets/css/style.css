@@ -115,7 +115,7 @@
     font-size: 12px;
 }
 
-.quantity-btn{
+.quantity-btn {
     width: 20px;
     height: 20px;
     border: none;
@@ -125,6 +125,9 @@
     align-items: center;
 }
 
+.display-none {
+    display: none;
+}
 
 /* responsive */
 @media (max-width:380px) {
@@ -145,5 +148,11 @@
     .swiper-pagination span {
         width: 10px;
         height: 10px;
+    }
+}
+
+@media (max-width:340px) {
+    .checkout-box {
+        left: -286px;
     }
 }
