@@ -90,13 +90,15 @@ let counter = document.getElementById("item-counter")
 
 counter.innerHTML = cartArr.length
 function addToCart(productID) {
-    let item = productArr.find((obj) => { return obj.id == productID })
-    let itemIndex = cartArr.findIndex((obj) => { return obj.id == productID })
+    let item = productArr.find((obj) => { return obj.id == productID });
+    let itemIndex = cartArr.findIndex((obj) => { return obj.id == productID });
     if (itemIndex != -1) {
-        Swal.fire("Item already added to cart 🛒");
+        alert("already added !")
     } else {
-        item.quantity = 1
-        cartArr.push(item)
+        
+        item.quantity = 1;
+        cartArr.push(item);
+        // Show success alert
         Swal.fire({
             position: "top-end",
             toast: true,
@@ -106,10 +108,12 @@ function addToCart(productID) {
             timer: 1500
         });
     }
-    
-    localStorage.setItem("cartArray", JSON.stringify(cartArr))
-    counter.innerHTML = cartArr.length
+
+    localStorage.setItem("cartArray", JSON.stringify(cartArr));
+    counter.innerHTML = cartArr.length;
+    displayItem();
 }
+
 
 function getStars(num) {
     let starString = "";
@@ -131,7 +135,7 @@ productArr.forEach((product, idx) => {
     <div class="col-lg-3 col-md-6">
         <div class="border border-2 shadow-sm p-3 card">
             <div>
-                <img src="${product.image}" alt="${product.name}" width="100%" class="">
+                <img src="${product.image}" alt="${product.name}" width="100%" class="" loading="lazy">
             </div>
             <h6 class="text-uppercase fw-semibold my-1">${product.name}</h6>
             <p class="mb-1 fs-sm text-capitalize text-secondary">${product.discription}</p>

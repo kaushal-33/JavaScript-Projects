@@ -97,12 +97,6 @@
     text-shadow: -1px -1px 0px rgb(0, 0, 0);
 }
 
-.checkout-box {
-    width: 300px;
-    left: -295px;
-    top: 30px;
-    border-radius: 10px 0px 10px 10px;
-}
 
 .checkout-img {
     width: 70px;

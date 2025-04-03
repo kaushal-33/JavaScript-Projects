@@ -22,7 +22,7 @@
                 <div class="logo">
                     <a class="" href="#">
                         <img src="https://opencart.dostguru.com/AS01/autospeed_02/image/catalog/logo.png" alt="LOGO"
-                            width="100%">
+                            loading="lazy" width="100%">
                     </a>
                 </div>
                 <div class="w-100 d-sm-block d-none">
@@ -52,7 +52,8 @@
                             <i class="ri-heart-line"></i>
                         </a>
                     </li>
-                    <li class="nav-item position-relative" id="cart-btn">
+                    <li class="nav-item position-relative" id="cart-btn" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                         <a class="nav-link fs-4" href="#">
                             <i class="ri-shopping-cart-2-line"></i>
                         </a>
@@ -60,20 +61,6 @@
                             id="item-counter">
                             0
                         </span>
-                        <!-- checkout box -->
-                        <div class="checkout-box position-absolute bg-white p-2 shadow-lg border z-2 display-none">
-                            <h5 class="py-3 border-bottom text-black fw-bold border-black text-capitalize">shopping cart
-                            </h5>
-                            <div id="checkout-box"></div>
-                            <div
-                                class="grand-total d-flex justify-content-around align-items-center mt-2 border-top border-black pt-2">
-                                <h6 class="mb-0 text-capitalize">total :</h6>
-                                <p class="mb-0 text-danger" id="total">-</p>
-                            </div>
-                            <button class="checkout-btn w-100  text-capitalize btn-success rounded-pill mt-2 btn">
-                                checkout
-                            </button>
-                        </div>
                     </li>
                 </ul>
             </div>
@@ -118,7 +105,7 @@
                                 <div class="col-md-7 col-lg-6 col-12">
                                     <h6 class="text-warning text-uppercase fs-5">shop the very best</h6>
                                     <h2 class="text-white text-capitalize mt-4 mb-3 display-3 fw-semibold">
-                                        just got bigger cart parts online
+                                        just got bigger car parts online
                                     </h2>
                                     <p class="text-white text-capitalize mb-5 fs-5">
                                         excludes performance parts, garage equipment
@@ -137,7 +124,7 @@
                                 <div class="col-md-7 col-lg-6 col-12">
                                     <h6 class="text-warning text-uppercase fs-5">shop the very best</h6>
                                     <h2 class="text-white text-capitalize mt-4 mb-3 display-3 fw-semibold">
-                                        just got bigger cart parts online
+                                        just got bigger car parts online
                                     </h2>
                                     <p class="text-white text-capitalize mb-5 fs-5">
                                         excludes performance parts, garage equipment
@@ -166,24 +153,34 @@
             </div>
         </section>
     </main>
+    <!-- checkout box -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <a class="" href="#">
+                <img src="https://opencart.dostguru.com/AS01/autospeed_02/image/catalog/logo.png" alt="LOGO"
+                    loading="lazy" width="100%">
+            </a>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <h5 class="py-3 border-bottom text-black fw-bold border-black text-capitalize" id="offcanvasExampleLabel">
+                shopping cart</h5>
+            <div id="checkout-box"></div>
+            <div class="grand-total d-flex justify-content-around align-items-center mt-2 border-top border-black pt-2">
+                <h6 class="mb-0 text-capitalize">total :</h6>
+                <p class="mb-0 text-danger" id="total">-</p>
+            </div>
+            <button class="checkout-btn w-100  text-capitalize btn-success rounded-pill mt-2 btn">
+                checkout
+            </button>
+        </div>
+    </div>
 
-    <!-- index js -->
-    <script src="./assets/js/index.js"></script>
-    <!-- jQuery js -->
-    <script src="./assets/js/jquery-3.7.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#cart-btn").on("click", function () {
-                $(".checkout-box").slideToggle(500);
-            });
-
-            $(".checkout-box").on("click", function (event) {
-                event.stopPropagation(); // Prevents triggering the slideToggle when clicking inside .checkout-box
-            });
-        });
-    </script>
     <!-- for checkout box js -->
     <script src="./assets/js/checkoutBox.js"></script>
+    <!-- index js -->
+    <script src="./assets/js/index.js"></script>
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- swiper js -->
@@ -201,4 +198,5 @@
     <!-- sweet alert js -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+
 </html>

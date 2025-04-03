@@ -3,8 +3,10 @@ let checkoutBox = document.getElementById("checkout-box");
 let totalAmount = 0;
 
 function displayItem() {
+    localArr = JSON.parse(localStorage.getItem("cartArray")) || [];
     checkoutBox.innerHTML = "";
     totalAmount = 0;
+
     if (localArr.length === 0) {
         checkoutBox.innerHTML = `
         <img src="./assets/images/empty-cart.png" alt="empty-cart image" width="100%">
@@ -18,6 +20,11 @@ function displayItem() {
         let subTotal = item.quantity * item.price;
         totalAmount += subTotal;
         content += `
+        <div class="text-end border-top">
+            <button class="btn text-danger" onclick="removeItem(${idx})">
+                <i class="ri-delete-bin-2-line"></i>
+            </button>
+        </div>
         <div class="d-flex gap-2 align-items-center">
             <div class="checkout-img border border-warning rounded">
                 <img src="${item.image}" alt="${item.name}" width="100%" height="100%">
@@ -25,9 +32,6 @@ function displayItem() {
             <div>
                 <div class="d-flex justify-content-between align-items-center">
                     <h6 class="text-uppercase fw-bold mb-0">${item.name}</h6>
-                    <button class="btn text-danger d-flex justify-content-center align-items-center" onclick="removeItem(${idx})">
-                        <i class="ri-delete-bin-2-line"></i>
-                    </button>
                 </div>
                 <p class="m-0 very-fs-sm text-capitalize text-secondary">${item.discription}</p>
             </div>
@@ -79,6 +83,7 @@ function removeItem(index) {
     localArr.splice(index, 1);
     saveCartArray();
     displayItem();
+    counter.innerHTML = localArr.length
 }
 
 // Function to store cartArray in localStorage
