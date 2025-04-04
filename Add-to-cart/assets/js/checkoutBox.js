@@ -81,14 +81,24 @@ function updateQuantity(index, value) {
 
 function removeItem(index) {
     localArr.splice(index, 1);
-    saveCartArray();
+
+    if (localArr.length === 0) {
+        localStorage.removeItem("cartArray");
+        counter.innerHTML = 0;
+    } else {
+        saveCartArray();
+        counter.innerHTML = localArr.length;
+    }
+
     displayItem();
-    counter.innerHTML = localArr.length
 }
 
-// Function to store cartArray in localStorage
 function saveCartArray() {
-    localStorage.setItem("cartArray", JSON.stringify(localArr));
+    if (localArr.length === 0) {
+        localStorage.removeItem("cartArray");
+    } else {
+        localStorage.setItem("cartArray", JSON.stringify(localArr));
+    }
 }
 
 displayItem();

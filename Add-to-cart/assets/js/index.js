@@ -90,12 +90,20 @@ let counter = document.getElementById("item-counter")
 
 counter.innerHTML = cartArr.length
 function addToCart(productID) {
+    cartArr = JSON.parse(localStorage.getItem("cartArray")) || [];
     let item = productArr.find((obj) => { return obj.id == productID });
     let itemIndex = cartArr.findIndex((obj) => { return obj.id == productID });
     if (itemIndex != -1) {
-        alert("already added !")
+        Swal.fire({
+            position: "top-end",
+            toast: true,
+            icon: "warning",
+            title: "Item already added to cart.",
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
-        
+
         item.quantity = 1;
         cartArr.push(item);
         // Show success alert
@@ -107,10 +115,10 @@ function addToCart(productID) {
             showConfirmButton: false,
             timer: 1500
         });
+        localStorage.setItem("cartArray", JSON.stringify(cartArr));
+        counter.innerHTML = cartArr.length;
     }
 
-    localStorage.setItem("cartArray", JSON.stringify(cartArr));
-    counter.innerHTML = cartArr.length;
     displayItem();
 }
 
