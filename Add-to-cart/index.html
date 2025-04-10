@@ -110,7 +110,8 @@
                                     <p class="text-white text-capitalize mb-5 fs-5">
                                         excludes performance parts, garage equipment
                                     </p>
-                                    <button class="text-capitalize py-2 px-4 shadow-none rounded-pill btn btn-warning">
+                                    <button class="text-capitalize py-2 px-4 shadow-none rounded-pill btn btn-warning"
+                                        onclick="window.location='#product-section'">
                                         shop now
                                     </button>
                                 </div>
@@ -141,7 +142,7 @@
             </div>
         </section>
         <!-- products section -->
-        <section class="py-5">
+        <section class="py-5" id="product-section">
             <div class="container">
                 <div>
                     <h6
@@ -153,7 +154,7 @@
             </div>
         </section>
     </main>
-    <!-- checkout box -->
+    <!-- checkout box off canvas-->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <a class="" href="#">
@@ -169,11 +170,78 @@
             <div id="checkout-box"></div>
             <div class="grand-total d-flex justify-content-around align-items-center mt-2 border-top border-black pt-2">
                 <h6 class="mb-0 text-capitalize">total :</h6>
-                <p class="mb-0 text-danger" id="total">-</p>
+                <p class="mb-0 text-primary" id="total">-</p>
             </div>
-            <button class="checkout-btn w-100  text-capitalize btn-success rounded-pill mt-2 btn">
+            <button class="checkout-btn w-100  text-capitalize btn-success rounded-pill mt-2 btn" id="check-btn">
                 checkout
             </button>
+        </div>
+    </div>
+    <!-- Shipping Form Modal -->
+    <div class="modal fade" id="shippingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="shippingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content shadow-lg rounded-4 border-0">
+                <div class="modal-header bg-primary text-white rounded-top-4">
+                    <h5 class="modal-title" id="shippingModalLabel">Shipping Information</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="fullName" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" placeholder="John Doe">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phoneNumber" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phoneNumber" placeholder="+1 234 567 8901">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Street Address</label>
+                            <input type="text" class="form-control" id="address" placeholder="1234 Main St">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" class="form-control" id="city" placeholder="New York">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="state" class="form-label">State</label>
+                                <input type="text" class="form-control" id="state" placeholder="NY">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="postalCode" class="form-label">Postal Code</label>
+                                <input type="text" class="form-control" id="postalCode" placeholder="10001">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="country" class="form-label">Country</label>
+                                <select class="form-select" id="country">
+                                    <option selected>Choose...</option>
+                                    <option>United States</option>
+                                    <option>Canada</option>
+                                    <option>India</option>
+                                    <option>Australia</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="defaultAddress">
+                            <label class="form-check-label" for="defaultAddress">
+                                Use as default shipping address
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer px-4 py-3">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
         </div>
     </div>
 
