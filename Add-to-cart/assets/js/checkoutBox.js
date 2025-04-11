@@ -27,10 +27,6 @@ function displayItem() {
 
         shopBtn.classList.add("d-none")
         payBtn.classList.remove("d-none")
-        payBtn.addEventListener("click", function () {
-            this.setAttribute("data-bs-toggle", "modal")
-            this.setAttribute("data-bs-target", "#shippingModal")
-        })
         let content = "";
 
         localArr.forEach((item, idx) => {
@@ -93,7 +89,8 @@ function displayItem() {
                 timer: 1500,
                 showConfirmButton: false
             }).then(()=>{
-                window.location.reload()
+                window.location.reload() 
+                localStorage.removeItem("cartArray");
             });
         })
     }
