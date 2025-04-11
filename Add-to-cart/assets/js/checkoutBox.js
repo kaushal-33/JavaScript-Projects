@@ -1,7 +1,8 @@
 let localArr = JSON.parse(localStorage.getItem("cartArray")) || [];
 let checkoutBox = document.getElementById("checkout-box");
-let checkoutBtn = document.getElementById("check-btn");
-
+let shopBtn = document.getElementById("shop-btn");
+let payBtn = document.getElementById("pay-btn");
+let formBtn = document.getElementById("form-btn")
 let totalAmount = 0;
 
 function displayItem() {
@@ -14,17 +15,22 @@ function displayItem() {
         <img src="./assets/images/empty-cart.png" alt="empty-cart image" width="100%">
         <p class='text-center'>Your cart is empty</p>`;
         document.getElementById("total").innerHTML = 0
-
-        checkoutBtn.innerHTML = "shop now"
-        checkoutBtn.addEventListener("click", function () {
+        payBtn.classList.add("d-none")
+        shopBtn.classList.remove("d-none")
+        shopBtn.addEventListener("click", function () {
             document.location = "#product-section"
             const offcanvasEl = document.querySelector(".offcanvas");
             const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl) || new bootstrap.Offcanvas(offcanvasEl);
             offcanvas.hide();
         })
     } else {
-        checkoutBtn.innerHTML = "checkout"
 
+        shopBtn.classList.add("d-none")
+        payBtn.classList.remove("d-none")
+        payBtn.addEventListener("click", function () {
+            this.setAttribute("data-bs-toggle", "modal")
+            this.setAttribute("data-bs-target", "#shippingModal")
+        })
         let content = "";
 
         localArr.forEach((item, idx) => {
@@ -78,6 +84,18 @@ function displayItem() {
 
         checkoutBox.innerHTML = content;
         document.getElementById("total").innerHTML = `<i class="ri-money-rupee-circle-line"></i> ${totalAmount}`;
+
+        formBtn.addEventListener("click", function () {
+            Swal.fire({
+                title: "Order Placed",
+                text: "Thank you for shopping!",
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false
+            }).then(()=>{
+                window.location.reload()
+            });
+        })
     }
 }
 

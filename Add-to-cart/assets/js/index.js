@@ -138,6 +138,13 @@ function getStars(num) {
     return starString;
 }
 
+function buyNow(productID) {
+    addToCart(productID)
+    const offcanvasEl = document.querySelector(".offcanvas");
+    const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl) || new bootstrap.Offcanvas(offcanvasEl);
+    offcanvas.show();
+}
+
 productArr.forEach((product, idx) => {
     productContainer.innerHTML += `
     <div class="col-lg-3 col-md-6">
@@ -159,7 +166,7 @@ productArr.forEach((product, idx) => {
                 </p>
             </div>
             <div class="mt-3 text-md-start text-center">
-                <button class="btn border text-capitalize fs-sm buy-now">buy now</button>
+                <button class="btn border text-capitalize fs-sm buy-now" onclick="buyNow(${product.id})">buy now</button>
                 <button class="btn border text-capitalize fs-sm to-cart" onclick="addToCart(${product.id})">add to cart</button>
             </div>
         </div>

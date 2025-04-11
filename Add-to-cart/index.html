@@ -172,23 +172,25 @@
                 <h6 class="mb-0 text-capitalize">total :</h6>
                 <p class="mb-0 text-primary" id="total">-</p>
             </div>
-            <button class="checkout-btn w-100  text-capitalize btn-success rounded-pill mt-2 btn" id="check-btn">
+            <button class="checkout-btn w-100  text-capitalize btn-success rounded-pill mt-2 btn" id="shop-btn">
+                shop now
+            </button>
+            <button class="checkout-btn w-100  text-capitalize btn-success rounded-pill mt-2 btn d-none" id="pay-btn">
                 checkout
             </button>
         </div>
     </div>
     <!-- Shipping Form Modal -->
-    <div class="modal fade" id="shippingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="shippingModalLabel" aria-hidden="true">
+    <div class="modal fade" id="shippingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content shadow-lg rounded-4 border-0">
-                <div class="modal-header bg-primary text-white rounded-top-4">
-                    <h5 class="modal-title" id="shippingModalLabel">Shipping Information</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                <div class="modal-header bg-warning text-white rounded-top-4">
+                    <h5 class="modal-title text-black" id="shippingModalLabel">Shipping Information</h5>
+                    <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
                 </div>
                 <div class="modal-body p-4">
-                    <form>
+                    <form id="form">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="fullName" class="form-label">Full Name</label>
@@ -234,12 +236,15 @@
                             <label class="form-check-label" for="defaultAddress">
                                 Use as default shipping address
                             </label>
+                            <p class="text-danger">This website is for testing purposes only. Shipping form validation
+                                has not been implemented yet.</p>
+                        </div>
+                        <div class="modal-footer px-4 py-3">
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-success" id="form-btn">Submit</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer px-4 py-3">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </div>
