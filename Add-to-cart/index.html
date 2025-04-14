@@ -175,17 +175,21 @@
             <button class="checkout-btn w-100  text-capitalize btn-success rounded-pill mt-2 btn" id="shop-btn">
                 shop now
             </button>
-            <button class="checkout-btn w-100  text-capitalize btn-success rounded-pill mt-2 btn d-none" id="pay-btn">
+            <button class="checkout-btn w-100  text-capitalize btn-success rounded-pill mt-2 btn d-none" id="pay-btn"
+                data-bs-toggle="modal" data-bs-target="#shippingModal">
                 checkout
             </button>
         </div>
     </div>
     <!-- Shipping Form Modal -->
-    <div class="modal fade" id="shippingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal fade" id="shippingModal" data-bs-backdrop="static" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content shadow-lg rounded-4 border-0">
                 <div class="modal-header bg-warning text-white rounded-top-4">
-                    <h5 class="modal-title text-black" id="shippingModalLabel">Shipping Information</h5>
+                    <div>
+                        <h5 class="modal-title text-black" id="shippingModalLabel">Shipping Information</h5>
+                        <p class="text-danger text-center m-0 fw-bold">*Please fill all the inputs before submitting</p>
+                    </div>
                     <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
@@ -237,7 +241,8 @@
                                 Use as default shipping address
                             </label>
                             <p class="text-danger">This website is for testing purposes only. Shipping form validation
-                                has not been implemented yet.</p>
+                                has not been implemented yet.
+                            </p>
                         </div>
                         <div class="modal-footer px-4 py-3">
                             <button type="button" class="btn btn-outline-secondary"
