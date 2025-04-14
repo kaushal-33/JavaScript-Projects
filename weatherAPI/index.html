@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Know the weather</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #cef;
+            font-family: Roboto, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .widget {
+            background: linear-gradient(to bottom right, #3cc0fe 20%, #0066ff);
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0px 40px 80px -20px rgba(39, 165, 253, 0.4);
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .details {
+            color: white;
+            flex: 1;
+            min-width: 250px;
+            z-index: 2;
+        }
+
+        .temperature {
+            font-size: 8em;
+            font-weight: 300;
+        }
+
+        .summary {
+            color: #dde8f0;
+            font-size: 1.8em;
+            font-weight: 300;
+            margin: -16px 0 16px 8px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #5f7ea8;
+            width: fit-content;
+        }
+
+        .precipitation,
+        .wind {
+            color: #dde8f0;
+            font-size: 1.4em;
+            font-weight: 300;
+            margin-left: 8px;
+        }
+
+        .precipitation {
+            margin-top: 16px;
+        }
+
+        .wind {
+            margin-top: 4px;
+        }
+
+        /* Background graphics */
+        .pictoBackdrop,
+        .pictoFrame,
+        .pictoCloudBig,
+        .pictoCloudFill,
+        .pictoCloudSmall,
+        .iconCloudBig,
+        .iconCloudFill,
+        .iconCloudSmall {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .pictoBackdrop {
+            height: 500px;
+            width: 500px;
+            background: linear-gradient(160deg, rgba(60, 192, 254, 0.3) 40%, rgba(0, 102, 255, 0.3));
+            right: -100px;
+            top: -120px;
+        }
+
+        .pictoFrame {
+            height: 180px;
+            width: 180px;
+            background: #2e3a59;
+            box-shadow: 0px 50px 60px -20px #0066ff;
+            right: 50px;
+            top: 40px;
+        }
+
+        .pictoCloudBig {
+            height: 140px;
+            width: 140px;
+            background: #4d5b70;
+            box-shadow: 20px 20px 80px -20px #ffffff;
+            bottom: 100px;
+            right: 90px;
+        }
+
+        .pictoCloudFill {
+            height: 100px;
+            width: 100px;
+            background: #4d5b70;
+            box-shadow: 0px 20px 80px -20px #ffffff;
+            bottom: 100px;
+            right: 143px;
+        }
+
+        .pictoCloudSmall {
+            height: 80px;
+            width: 80px;
+            background: #dde8f0;
+            bottom: 97px;
+            right: 170px;
+        }
+
+        @media (max-width: 768px) {
+            .widget {
+                flex-direction: column;
+                padding: 1.5rem;
+                height: auto;
+            }
+
+            .temperature {
+                font-size: 6em;
+            }
+
+            .summary {
+                font-size: 1.5em;
+            }
+
+            .precipitation,
+            .wind {
+                font-size: 1.2em;
+            }
+
+            .pictoBackdrop {
+                height: 400px;
+                width: 400px;
+                top: -80px;
+                right: -80px;
+            }
+
+            .pictoFrame {
+                height: 140px;
+                width: 140px;
+                top: 50px;
+                right: 30px;
+            }
+
+            .pictoCloudBig {
+                height: 120px;
+                width: 120px;
+                top: 130px;
+                right: 100px;
+            }
+
+            .pictoCloudFill {
+                height: 80px;
+                width: 80px;
+                top: 200px;
+                right: 180px;
+            }
+
+            .pictoCloudSmall {
+                height: 60px;
+                width: 60px;
+                top: 180px;
+                right: 220px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="widget">
+            <div class="details">
+                <div class="temperature">20°</div>
+                <div class="summary">
+                    <p class="summaryText">Mostly Cloudy</p>
+                </div>
+                <div class="precipitation">Precipitation: 20%</div>
+                <div class="wind">Wind: 3 mph</div>
+            </div>
+
+            <!-- Background/Cloud shapes -->
+            <div class="pictoBackdrop"></div>
+            <div class="pictoFrame"></div>
+            <div class="pictoCloudBig"></div>
+            <div class="pictoCloudFill"></div>
+            <div class="pictoCloudSmall"></div>
+        </div>
+    </div>
+</body>
+
+</html>
