@@ -25,7 +25,7 @@
     </div>
 
     <div class="container">
-        <h1 class="app-title">Weather Vista</h1>
+        <h1 class="app-title mt-5">Weather Vista</h1>
 
         <div class="search-container">
             <input type="text" id="input" class="search-input" placeholder="Search for a city..." />
@@ -105,6 +105,50 @@
         const input = document.getElementById("input");
         const searchBtn = document.getElementById("searchBtn");
 
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            function getLocation() {
+                if (navigator.geolocation) {
+                    const loc = navigator.geolocation.getCurrentPosition(success, error);
+                    console.log(loc)
+                } else {
+                    x.innerHTML = "Geolocation is not supported by this browser.";
+                }
+            }
+            createBubbles();
+            getLocation();
+
+            function error(){}
+
+            function success(position) {
+                const lat = position.coords.latitude || 40.7128;
+                const long = position.coords.longitude || 74.0060;
+
+                const KEY = `9d896b9e8e9098603a84c82c846dda5f`;
+                const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=${KEY}`;
+
+                fetch(weatherURL)
+                    .then(res => res.json())
+                    .then(res => {
+                        console.log(res);
+
+                        if (res.cod !== 200) throw new Error(res.message);
+
+                        cityName.innerHTML = `<span class="location-icon"><i class="fas fa-map-marker-alt"></i></span>${res.name}, ${res.sys.country}`;
+                        temperature.innerHTML = `${res.main.temp}<span class="temperature-unit">°C</span>`;
+                        description.innerHTML = res.weather[0].description;
+                        humidity.innerHTML = `${res.main.humidity}%`;
+                        wind.innerHTML = `${res.wind.speed} km/h`;
+                        pressure.innerHTML = `${res.main.pressure} hPa`;
+                        feelsLike.innerHTML = `${Math.round(res.main.feels_like)}°C`;
+                        weatherIcon.src = `https://openweathermap.org/img/wn/${res.weather[0].icon}@4x.png`;
+                        weatherIcon.alt = res.weather[0].description;
+                    })
+                    .catch(err => {
+                        alert("City not found. Please try again.");
+                    });
+            }
+        })
         // bubble animation
         function createBubbles() {
             for (let i = 0; i < 6; i++) {
@@ -126,7 +170,7 @@
             }
         }
 
-        createBubbles();
+
 
         // Update date and time
         function updateDateTime() {
@@ -141,21 +185,21 @@
 
         // Weather update function
         const weatherUpdate = () => {
-            const KEY = `9d896b9e8e9098603a84c82c846dda5f`;
             const city = input.value.trim();
 
             if (!city) return alert("Please enter a city name.");
 
+            const KEY = `9d896b9e8e9098603a84c82c846dda5f`;
             const weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${KEY}`;
 
             fetch(weatherURL)
                 .then(res => res.json())
                 .then(res => {
                     console.log(res);
-                    
+
                     if (res.cod !== 200) throw new Error(res.message);
 
-                    cityName.innerHTML = `<span class="location-icon"><i class="fas fa-map-marker-alt"></i></span>${res.name}, ${res.sys.country}`;
+                    cityName.innerHTML = `<span class="location-icon"><i class="fas fa-map-marker-alt"></i></span>${res.name}, ${res.sys.country || " "}`;
                     temperature.innerHTML = `${res.main.temp}<span class="temperature-unit">°C</span>`;
                     description.innerHTML = res.weather[0].description;
                     humidity.innerHTML = `${res.main.humidity}%`;
