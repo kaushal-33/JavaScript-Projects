@@ -151,7 +151,9 @@
             fetch(weatherURL)
                 .then(res => res.json())
                 .then(res => {
-                    if (res.status !== 200) throw new Error(res.message);
+                    console.log(res);
+                    
+                    if (res.cod !== 200) throw new Error(res.message);
 
                     cityName.innerHTML = `<span class="location-icon"><i class="fas fa-map-marker-alt"></i></span>${res.name}, ${res.sys.country}`;
                     temperature.innerHTML = `${res.main.temp}<span class="temperature-unit">°C</span>`;
