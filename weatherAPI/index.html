@@ -4,216 +4,175 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Know the weather</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background: #cef;
-            font-family: Roboto, sans-serif;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            min-height: 100vh;
-        }
-
-        .widget {
-            background: linear-gradient(to bottom right, #3cc0fe 20%, #0066ff);
-            width: 100%;
-            max-width: 900px;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0px 40px 80px -20px rgba(39, 165, 253, 0.4);
-            position: relative;
-            overflow: hidden;
-            padding: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .details {
-            color: white;
-            flex: 1;
-            min-width: 250px;
-            z-index: 2;
-        }
-
-        .temperature {
-            font-size: 8em;
-            font-weight: 300;
-        }
-
-        .summary {
-            color: #dde8f0;
-            font-size: 1.8em;
-            font-weight: 300;
-            margin: -16px 0 16px 8px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #5f7ea8;
-            width: fit-content;
-        }
-
-        .precipitation,
-        .wind {
-            color: #dde8f0;
-            font-size: 1.4em;
-            font-weight: 300;
-            margin-left: 8px;
-        }
-
-        .precipitation {
-            margin-top: 16px;
-        }
-
-        .wind {
-            margin-top: 4px;
-        }
-
-        /* Background graphics */
-        .pictoBackdrop,
-        .pictoFrame,
-        .pictoCloudBig,
-        .pictoCloudFill,
-        .pictoCloudSmall,
-        .iconCloudBig,
-        .iconCloudFill,
-        .iconCloudSmall {
-            position: absolute;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .pictoBackdrop {
-            height: 500px;
-            width: 500px;
-            background: linear-gradient(160deg, rgba(60, 192, 254, 0.3) 40%, rgba(0, 102, 255, 0.3));
-            right: -100px;
-            top: -120px;
-        }
-
-        .pictoFrame {
-            height: 180px;
-            width: 180px;
-            background: #2e3a59;
-            box-shadow: 0px 50px 60px -20px #0066ff;
-            right: 50px;
-            top: 40px;
-        }
-
-        .pictoCloudBig {
-            height: 140px;
-            width: 140px;
-            background: #4d5b70;
-            box-shadow: 20px 20px 80px -20px #ffffff;
-            bottom: 100px;
-            right: 90px;
-        }
-
-        .pictoCloudFill {
-            height: 100px;
-            width: 100px;
-            background: #4d5b70;
-            box-shadow: 0px 20px 80px -20px #ffffff;
-            bottom: 100px;
-            right: 143px;
-        }
-
-        .pictoCloudSmall {
-            height: 80px;
-            width: 80px;
-            background: #dde8f0;
-            bottom: 97px;
-            right: 170px;
-        }
-
-        @media (max-width: 768px) {
-            .widget {
-                flex-direction: column;
-                padding: 1.5rem;
-                height: auto;
-            }
-
-            .temperature {
-                font-size: 6em;
-            }
-
-            .summary {
-                font-size: 1.5em;
-            }
-
-            .precipitation,
-            .wind {
-                font-size: 1.2em;
-            }
-
-            .pictoBackdrop {
-                height: 400px;
-                width: 400px;
-                top: -80px;
-                right: -80px;
-            }
-
-            .pictoFrame {
-                height: 140px;
-                width: 140px;
-                top: 50px;
-                right: 30px;
-            }
-
-            .pictoCloudBig {
-                height: 120px;
-                width: 120px;
-                top: 130px;
-                right: 100px;
-            }
-
-            .pictoCloudFill {
-                height: 80px;
-                width: 80px;
-                top: 200px;
-                right: 180px;
-            }
-
-            .pictoCloudSmall {
-                height: 60px;
-                width: 60px;
-                top: 180px;
-                right: 220px;
-            }
-
-        }
-    </style>
+    <title>Weather Vista</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
+    <!-- Background bubbles -->
+    <div class="bubble" style="width: 60px; height: 60px; left: 10%; animation-duration: 15s;"></div>
+    <div class="bubble" style="width: 40px; height: 40px; left: 25%; animation-duration: 18s; animation-delay: 2s;">
+    </div>
+    <div class="bubble" style="width: 80px; height: 80px; left: 40%; animation-duration: 12s; animation-delay: 5s;">
+    </div>
+    <div class="bubble" style="width: 50px; height: 50px; left: 60%; animation-duration: 20s; animation-delay: 1s;">
+    </div>
+    <div class="bubble" style="width: 70px; height: 70px; left: 75%; animation-duration: 16s; animation-delay: 3s;">
+    </div>
+    <div class="bubble" style="width: 45px; height: 45px; left: 90%; animation-duration: 14s; animation-delay: 4s;">
+    </div>
+
     <div class="container">
-        <div class="widget">
-            <div class="details">
-                <div class="temperature">20°</div>
-                <div class="summary">
-                    <p class="summaryText">Mostly Cloudy</p>
+        <h1 class="app-title">Weather Vista</h1>
+
+        <div class="search-container">
+            <input type="text" id="input" class="search-input" placeholder="Search for a city..." />
+            <button id="searchBtn" class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <div class="weather-container">
+            <div class="main-weather-card">
+                <div>
+                    <h2 class="city-name" id="city-name">
+                        <span class="location-icon"><i class="fas fa-map-marker-alt"></i></span>
+                        New York
+                    </h2>
+                    <div class="date-time" id="date-time">Monday, April 14 | 10:30 AM</div>
                 </div>
-                <div class="precipitation">Precipitation: 20%</div>
-                <div class="wind">Wind: 3 mph</div>
+                <div class="temperature-container">
+                    <div class="temperature" id="temperature">--<span class="temperature-unit">°C</span></div>
+                    <img src="" alt="" id="weather-icon" class="weather-icon">
+                </div>
+                <div class="weather-description" id="description">Search for a city</div>
             </div>
 
-            <!-- Background/Cloud shapes -->
-            <div class="pictoBackdrop"></div>
-            <div class="pictoFrame"></div>
-            <div class="pictoCloudBig"></div>
-            <div class="pictoCloudFill"></div>
-            <div class="pictoCloudSmall"></div>
+            <div class="details-card">
+                <h3 class="details-title">Weather Details</h3>
+                <div class="weather-detail">
+                    <div class="detail-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h4>Humidity</h4>
+                        <p id="humidity">--%</p>
+                    </div>
+                </div>
+                <div class="weather-detail">
+                    <div class="detail-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h4>Wind Speed</h4>
+                        <p id="wind">-- km/h</p>
+                    </div>
+                </div>
+                <div class="weather-detail">
+                    <div class="detail-icon">
+                        <i class="fas fa-compress-alt"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h4>Pressure</h4>
+                        <p id="pressure">-- hPa</p>
+                    </div>
+                </div>
+                <div class="weather-detail">
+                    <div class="detail-icon">
+                        <i class="fas fa-thermometer-half"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h4>Feels Like</h4>
+                        <p id="feels-like">--°C</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        const cityName = document.getElementById("city-name");
+        const dateTime = document.getElementById("date-time");
+        const temperature = document.getElementById("temperature");
+        const description = document.getElementById("description");
+        const weatherIcon = document.getElementById("weather-icon");
+        const humidity = document.getElementById("humidity");
+        const wind = document.getElementById("wind");
+        const pressure = document.getElementById("pressure");
+        const feelsLike = document.getElementById("feels-like");
+        const input = document.getElementById("input");
+        const searchBtn = document.getElementById("searchBtn");
+
+        // bubble animation
+        function createBubbles() {
+            for (let i = 0; i < 6; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+
+                const size = Math.random() * 60 + 20;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 10 + 10;
+
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${left}%`;
+                bubble.style.animationDuration = `${duration}s`;
+                bubble.style.animationDelay = `${delay}s`;
+
+                document.body.appendChild(bubble);
+            }
+        }
+
+        createBubbles();
+
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', month: 'long', day: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit' };
+            dateTime.innerHTML = `${now.toLocaleDateString('en-US', options)} | ${now.toLocaleTimeString('en-US', timeOptions)}`;
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 60000); // Update every minute
+
+        // Weather update function
+        const weatherUpdate = () => {
+            const KEY = `9d896b9e8e9098603a84c82c846dda5f`;
+            const city = input.value.trim();
+
+            if (!city) return alert("Please enter a city name.");
+
+            const weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${KEY}`;
+
+            fetch(weatherURL)
+                .then(res => res.json())
+                .then(res => {
+                    if (res.status !== 200) throw new Error(res.message);
+
+                    cityName.innerHTML = `<span class="location-icon"><i class="fas fa-map-marker-alt"></i></span>${res.name}, ${res.sys.country}`;
+                    temperature.innerHTML = `${res.main.temp}<span class="temperature-unit">°C</span>`;
+                    description.innerHTML = res.weather[0].description;
+                    humidity.innerHTML = `${res.main.humidity}%`;
+                    wind.innerHTML = `${res.wind.speed} km/h`;
+                    pressure.innerHTML = `${res.main.pressure} hPa`;
+                    feelsLike.innerHTML = `${Math.round(res.main.feels_like)}°C`;
+                    weatherIcon.src = `https://openweathermap.org/img/wn/${res.weather[0].icon}@4x.png`;
+                    weatherIcon.alt = res.weather[0].description;
+                })
+                .catch(err => {
+                    alert("City not found. Please try again.");
+                });
+        };
+
+        searchBtn.addEventListener("click", weatherUpdate);
+        input.addEventListener("keypress", e => {
+            if (e.key === "Enter") weatherUpdate();
+        });
+    </script>
 </body>
 
 </html>
