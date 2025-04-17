@@ -18,12 +18,13 @@
 body {
     background: linear-gradient(135deg, #121212 0%, #1a1a2e 100%);
     color: var(--light);
-    height: 100vh;
+    min-height: 100vh;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    overflow-x: hidden;
 }
 
 .neon-grid {
@@ -40,10 +41,12 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
 }
 
 .section-title {
-    font-size: 4rem;
+    font-size: clamp(1.5rem, 5vw, 4rem);
     font-weight: 800;
     letter-spacing: -0.05em;
     text-transform: uppercase;
@@ -70,7 +73,7 @@ body {
     display: flex;
     margin-bottom: 2rem;
     position: relative;
-    max-width: 500px;
+    width: 100%;
 }
 
 .search-input {
@@ -83,6 +86,7 @@ body {
     font-size: 1rem;
     outline: none;
     transition: all 0.3s ease;
+    width: 100%;
 }
 
 .search-input:focus {
@@ -97,7 +101,8 @@ body {
 .search-button {
     position: absolute;
     right: 5px;
-    top: 5px;
+    top: 50%;
+    transform: translateY(-50%);
     background: var(--primary);
     color: white;
     border: none;
@@ -110,7 +115,7 @@ body {
 
 .search-button:hover {
     background: var(--accent);
-    transform: translateY(-2px);
+    transform: translateY(calc(-50% - 2px));
     box-shadow: 0 5px 15px rgba(32, 201, 151, 0.4);
 }
 
@@ -128,6 +133,7 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     position: relative;
+    width: 100%;
 }
 
 .nft-card:hover {
@@ -199,6 +205,7 @@ body {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     color: white;
+    word-break: break-word;
 }
 
 .nft-details {
@@ -264,6 +271,7 @@ body {
 
 .stat-item {
     text-align: center;
+    flex: 1;
 }
 
 .stat-value {
@@ -282,38 +290,63 @@ body {
     box-shadow: 0 0 20px rgba(32, 201, 151, 0.3);
 }
 
-@media (max-width: 576px) {
+/* Media queries - maintain side-by-side until 768px */
+@media (max-width: 991px) {
+    .section-title::after {
+        left: 10%;
+        width: 80%;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* Below 768px, stack elements */
+@media (max-width: 767px) {
     .row.align-items-center {
         flex-direction: column;
     }
 
-    .col-6,
-    .col-md-6,
-    .col-lg-4 {
-        width: 100% !important;
-        flex: 0 0 100%;
+    .col-md-6 {
+        width: 100%;
         max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    .section-title::after {
+        left: 20%;
+        width: 60%;
     }
 
     .search-container {
-        flex-direction: column;
-        align-items: stretch;
+        margin: 0 auto 2rem;
+    }
+
+    .nft-card.featured {
+        margin-top: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding: 15px;
     }
 
     .search-input {
         width: 100%;
-        padding: 0.7rem 1rem;
-        margin-bottom: 0.5rem;
+        padding: 0.7rem 3.5rem 0.7rem 1rem;
+        font-size: 0.9rem;
     }
 
     .search-button {
-        width: 100%;
-        position: static;
-        border-radius: 8px;
-    }
-
-    .nft-card.featured {
-        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
 
     .nft-grid {
@@ -322,30 +355,31 @@ body {
     }
 
     .section-title {
-        font-size: 1.5rem;
-        text-align: center;
-        width: 100%;
+        font-size: 1.8rem;
     }
 
-    .section-title::after {
-        left: 25%;
-        width: 50%;
+    .nft-content {
+        padding: 1.2rem;
+    }
+
+    .stat-value {
+        font-size: 0.95rem;
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
     .search-input {
-        font-size: 0.9rem;
-        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        padding: 0.6rem 3.5rem 0.6rem 1rem;
     }
 
     .search-button {
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
     }
 
     .nft-title {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     .stat-value {
@@ -353,37 +387,101 @@ body {
     }
 
     .nft-content {
-        padding: 1rem;
+        padding: 1.1rem;
+    }
+
+    .virus-icon {
+        font-size: 3.5rem;
     }
 }
 
-@media (max-width: 320px) {
-    .container {
-        padding: 0 10px;
-    }
-
-    .nft-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .section-title {
-        font-size: 1.3rem;
+@media (max-width: 400px) {
+    body {
+        padding: 12px;
     }
 
     .search-input {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        padding: 0.6rem 3.2rem 0.6rem 0.8rem;
     }
 
     .search-button {
         font-size: 0.8rem;
+        padding: 0.4rem 0.7rem;
+    }
+
+    .nft-title {
+        font-size: 1rem;
     }
 
     .stat-value {
         font-size: 0.85rem;
     }
 
+    .nft-content {
+        padding: 1rem;
+    }
+
+    .virus-icon {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 320px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 0 8px;
+    }
+
+    .nft-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .section-title::after {
+        bottom: -8px;
+        height: 2px;
+    }
+
+    .search-input {
+        font-size: 0.75rem;
+        padding: 0.5rem 3rem 0.5rem 0.7rem;
+    }
+
+    .search-button {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .stat-value {
+        font-size: 0.8rem;
+    }
+
     .stat-label {
+        font-size: 0.65rem;
+    }
+
+    .nft-content {
+        padding: 0.8rem;
+    }
+
+    .nft-stats {
+        font-size: 0.9rem;
+    }
+
+    .nft-timestamp {
         font-size: 0.7rem;
+    }
+
+    .virus-icon {
+        font-size: 2.5rem;
     }
 }

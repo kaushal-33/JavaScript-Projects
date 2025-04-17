@@ -12,17 +12,17 @@
 <body>
     <div class="neon-grid"></div>
     <div class="container">
-        <div class="row align-items-center justify-content-around g-4 mb-4">
-            <div class="col-6">
+        <div class="row align-items-center justify-content-between mb-4">
+            <div class="col-md-6 col-12">
                 <h2 class="section-title">COVID-19 NFT Collection</h2>
-                <div class="search-container w-100">
+                <div class="search-container mt-5">
                     <input type="text" class="search-input" placeholder="Search state in INDIA..." id="input">
                     <button class="search-button" id="search">Search</button>
                 </div>
             </div>
 
             <!-- Featured Card Column -->
-            <div class="col-md-6 col-12 col-lg-4">
+            <div class="col-md-5 col-12">
                 <div class="nft-card featured h-10">
                     <div class="badge">Featured</div>
                     <div class="glow glow-1"></div>
@@ -58,32 +58,36 @@
 
     <script>
         let searchBtn = document.getElementById("search");
-        let states = [];
+        let inputField = document.getElementById("input");
 
         // Helper function to convert numbers to millions and format them to 1 decimal place
         function formatToMillions(num) {
             return (num / 1e6).toFixed(1) + "M";
         }
 
-        searchBtn.addEventListener("click", function () {
-            let stateName = document.getElementById("input").value.toLowerCase().trim();
+        function getData() {
+            const stateName = inputField.value.toLowerCase().trim();
+
             if (!stateName) {
-                alert("Enter State name !");
+                alert("Enter State name!");
                 return;
             }
+
             const URL = "https://api.rootnet.in/covid19-in/stats/latest";
-            document.getElementById("state-name").innerHTML = "Searching"
+            document.getElementById("state-name").innerHTML = "Searching...";
+
             fetch(URL)
                 .then((response) => response.json())
                 .then((response) => {
-                    states = response.data.regional;
+                    const states = response.data.regional;
 
-                    let stateFound = states.find((obj) => {
+                    const stateFound = states.find((obj) => {
                         return obj.loc.toLowerCase() === stateName;
                     });
 
                     if (!stateFound) {
-                        alert("State not found!\n in INDIA");
+                        alert("State not found in INDIA!");
+                        document.getElementById("state-name").innerHTML = "Not Found";
                         return;
                     }
 
@@ -97,9 +101,18 @@
                     alert("Something went wrong. Try again later.");
                 });
 
-            document.getElementById("input").value = ""
+            inputField.value = "";
+        }
+
+        searchBtn.addEventListener("click", getData);
+        inputField.addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                getData();
+            }
         });
     </script>
+
+
 
 
 
