@@ -145,7 +145,8 @@ body {
     width: 100%;
     height: 0;
     padding-bottom: 100%;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    background-image: url(./ChatGPT\ Image\ Apr\ 22\,\ 2025\,\ 09_33_49\ PM.png);
+    background-size: contain;
     position: relative;
     display: flex;
     align-items: center;
@@ -173,7 +174,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(74, 0, 224, 0.2), rgba(142, 45, 226, 0.2));
+    background: linear-gradient(135deg, rgba(74, 0, 224, 0.2), rgba(226, 223, 45, 0.2));
     z-index: 1;
 }
 
